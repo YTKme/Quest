@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	
+		<meta charset="utf-8" />
+		<title>PAL - {% block title %}Quest{% endblock %}</title>
+		
+		<!-- Cascading Style Sheet Head -->
+		<link rel="stylesheet" type="text/css" media="all" href="{{ RESOURCE }}/bootstrap-3.0.3/css/bootstrap.min.css" />
+		{% block csshead %}{% endblock %}
+		
+		<!-- JavaScript Head -->
+		<script type="text/javascript" src="{{ RESOURCE }}/js/jquery-1.10.2.min.js"></script>
+		{% block jshead %}{% endblock %}
+		
+	</head>
+	
+	<body>
+	
+		<header>
+			<h1>Quest</h1>
+		</header>
+		
+		<header class="page-header container">
+			<h2>{% block heading %}Quest{% endblock %}</h2>
+		</header>
+		
+		<section id="main" class="container">
+		{% block body %}
+		{% endblock %}
+		</section>
+		
+		<footer>
+		</footer>
+		
+		<!-- JavaScript Tail -->
+		{% block jstail %}
+		{% endblock %}
+	
+	</body>
+
+</html>

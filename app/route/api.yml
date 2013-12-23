@@ -1,0 +1,11 @@
+# Candidate
+#api.candidate.add:
+#  path: /candidate/add
+#  defaults: { _controller: 'CandidateController::add' }
+#  methods: [POST]
+
+# Project
+
+api:
+  path: /
+  defaults: { _controller: 'QuestController::main' }

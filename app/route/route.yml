@@ -1,0 +1,18 @@
+api:
+  prefix: /api
+  resource: api.yml
+
+# Home
+home:
+  path: /home
+  defaults: { _controller: 'QuestController::main' }
+
+index:
+  path: /
+  defaults: { _controller: 'QuestController::main' }
+
+# Default
+default:
+  path: /{url}
+  requirements: { 'url': '.*' }
+  defaults: { _controller: 'QuestController::error' }
