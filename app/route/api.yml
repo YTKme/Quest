@@ -1,10 +1,23 @@
-# Candidate
-#api.candidate.add:
-#  path: /candidate/add
-#  defaults: { _controller: 'CandidateController::add' }
-#  methods: [POST]
+# Game
+api.game.add:
+  path: /game/add
+  defaults: { _controller: 'GameController::add' }
+  methods: [POST]
 
-# Project
+api.game.retrieve:
+  path: /game/retrieve
+  defaults: { _controller: 'GameController::retrieve' }
+  methods: [GET]
+
+api.game.edit:
+  path: /game/edit
+  defaults: { _controller: 'GameController::edit' }
+  methods: [PUT]
+
+api.game.remove:
+  path: /game/remove
+  defaults: { _controller: 'GameController::remove' }
+  methods: [DELETE]
 
 api:
   path: /
