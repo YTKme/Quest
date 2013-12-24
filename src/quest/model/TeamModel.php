@@ -25,4 +25,66 @@ class TeamModel {
 	 */
 	protected $point = NULL;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param string $id
+	 * @param string $name
+	 * @param string $point
+	 */
+	public function __construct (
+		$id = NULL,
+		$name = NULL,
+		$point = NULL
+	) {
+		$this->id = $id;
+		$this->name = $name;
+		$this->point = $point;
+	}
+	
+	/**
+	 * Get ID
+	 * 
+	 * @return string
+	 */
+	public function getId () {
+		return $this->id;
+	}
+	
+	/**
+	 * Get name
+	 * 
+	 * @return string
+	 */
+	public function getName () {
+		return $this->name;
+	}
+	
+	/**
+	 * Set name
+	 * 
+	 * @param string $name
+	 */
+	public function setName ($name = NULL) {
+		$this->name = $name;
+	}
+	
+	/**
+	 * Get point
+	 * 
+	 * @return integer
+	 */
+	public function getPoint () {
+		return $this->point;
+	}
+	
+	/**
+	 * Set point
+	 * 
+	 * @param string $point
+	 */
+	public function setPoint ($point = NULL) {
+		$this->point = $point;
+	}
+	
 }

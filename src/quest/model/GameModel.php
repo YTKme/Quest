@@ -31,7 +31,7 @@ class GameModel {
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="start", type="datetimez")
+	 * @Column(name="start", type="datetimetz")
 	 */
 	protected $start = NULL;
 	
@@ -47,6 +47,14 @@ class GameModel {
 	
 	/**
 	 * Constructor
+	 * 
+	 * @param string $id
+	 * @param string $code
+	 * @param string $name
+	 * @param string $description
+	 * @param string $start
+	 * @param string $length
+	 * @param string $location
 	 */
 	public function __construct (
 		$id = NULL,
@@ -74,14 +82,24 @@ class GameModel {
 	
 	/**
 	 * To array
+	 * 
 	 * @return array
 	 */
 	public function toArray () {
-		
+		return array(
+			'id' => $this->getId(),
+			'code' => $this->getCode(),
+			'name' => $this->getName(),
+			'description' => $this->getDescription(),
+			'start' => $this->getStart(),
+			'length' => $this->getLength(),
+			'location' => $this->getLocation()
+		);
 	}
 	
 	/**
 	 * Get ID
+	 * 
 	 * @return integer
 	 */
 	public function getId () {
@@ -90,6 +108,7 @@ class GameModel {
 	
 	/**
 	 * Get code
+	 * 
 	 * @return string
 	 */
 	public function getCode () {
@@ -98,6 +117,7 @@ class GameModel {
 	
 	/**
 	 * Set code
+	 * 
 	 * @param string $code
 	 */
 	public function setCode ($code = NULL) {
@@ -106,6 +126,7 @@ class GameModel {
 	
 	/**
 	 * Get name
+	 * 
 	 * @return string
 	 */
 	public function getName () {
@@ -114,6 +135,7 @@ class GameModel {
 	
 	/**
 	 * Set name
+	 * 
 	 * @param string $name
 	 */
 	public function setName ($name = NULL) {
@@ -122,6 +144,7 @@ class GameModel {
 	
 	/**
 	 * Get description
+	 * 
 	 * @return string
 	 */
 	public function getDescription () {
@@ -130,10 +153,71 @@ class GameModel {
 	
 	/**
 	 * Set description
+	 * 
 	 * @param string $description
 	 */
 	public function setDescription ($description = NULL) {
 		$this->description = $description;
+	}
+	
+	/**
+	 * Get start
+	 * 
+	 * @return DateTime
+	 */
+	public function getStart () {
+		return $this->start;
+	}
+	
+	/**
+	 * Set start
+	 * 
+	 * @param string $start
+	 */
+	public function setStart ($start = NULL) {
+		$this->start = 
+			empty($start)
+				? NULL
+				: new DateTime($start);
+	}
+	
+	/**
+	 * Get length
+	 * 
+	 * @return DateTime
+	 */
+	public function getLength () {
+		return $this->length;
+	}
+	
+	/**
+	 * Set length
+	 * 
+	 * @param string $length
+	 */
+	public function setLength ($length = NULL) {
+		$this->length =
+			empty($length)
+				? NULL
+				: new DateTime($length);
+	}
+	
+	/**
+	 * Get location
+	 * 
+	 * @return string
+	 */
+	public function getLocation () {
+		return $this->location;
+	}
+	
+	/**
+	 * Set location
+	 * 
+	 * @param string $location
+	 */
+	public function setLocation ($location = NULL) {
+		$this->location = $location;
 	}
 	
 }
