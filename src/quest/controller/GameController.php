@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\DBAL\DBALException;
 
 class GameController implements ControllerInterface {
 
@@ -67,11 +68,14 @@ class GameController implements ControllerInterface {
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
-				return new Response('ERROR: Unable to add game.', 500);
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to add game.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
-						? new Response('ERROR: ' . $exception->getMessage(), 500)
+						? new Response('Exception: ' . $exception->getMessage(), 500)
 						: new Response('ERROR: Failure.', 500);
 			}
 			
@@ -103,9 +107,15 @@ class GameController implements ControllerInterface {
 					return $application->json($gameModels, 200);
 				}
 			} catch (DBALException $exception) {
-				return new Response('ERROR: Unable to retrieve game.', 500);
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve game.', 500);
 			} catch (Exception $exception) {
-				return new Response('ERROR: Failure.', 500);
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
 			}
 				
 			return new Response('ERROR: Unable to retrieve game.', 404);
@@ -183,9 +193,15 @@ class GameController implements ControllerInterface {
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
-				return new Response('ERROR: Unable to edit game.', 500);
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to edit game.', 500);
 			} catch (Exception $exception) {
-				return new Response('ERROR: Failure.', 500);
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
 			}
 			
 			return $application->json($gameArray, 200);
@@ -223,7 +239,10 @@ class GameController implements ControllerInterface {
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
-				return new Response('ERROR: Unable to delete game.', 500);
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to delete game.', 500);
 			} catch (Exception $exception) {
 				return new Response('ERROR: Failure.', 500);
 			}
