@@ -66,10 +66,7 @@ class GameModel {
 		$location = NULL
 	) {
 		$this->id = $id;
-		$this->code = 
-			empty($code)
-				? $this->generateRandomCode()
-				: $code;
+		$this->code = $code;
 		$this->name = $name;
 		$this->description = $description;
 		$this->start =

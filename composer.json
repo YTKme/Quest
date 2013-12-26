@@ -10,8 +10,8 @@
 		"twig/twig": "1.*",
 		"symfony/config": "2.3.*",
 		"symfony/yaml": "2.3.*",
-		"doctrine/dbal": "2.3.*",
-		"doctrine/orm": "2.3.*"
+		"doctrine/dbal": "2.4.*",
+		"doctrine/orm": "2.4.*"
 	},
 	"require-dev": {
 		"symfony/console": "2.3.*",
