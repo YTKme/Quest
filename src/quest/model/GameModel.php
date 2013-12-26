@@ -220,4 +220,8 @@ class GameModel {
 		$this->location = $location;
 	}
 	
+	private function generateCode () {
+		
+	}
+	
 }
