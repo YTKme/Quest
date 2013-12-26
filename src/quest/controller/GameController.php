@@ -44,18 +44,34 @@ class GameController implements ControllerInterface {
 			
 				foreach ($jsonData as $game) {
 					// Check if the game exist
-					if (!$gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('code' => $game['code']))) {
+					if (!$gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('name' => $game['name']))) {
 						// Create game
-						// TODO: Account for NULL values
 						$gameModel = new GameModel(
 								NULL, // ID
-								$game['code'],
-								$game['name'],
-								$game['description'],
-								$game['start'],
-								$game['length'],
-								$game['location']
+								empty($game['code'])
+									? NULL
+									: $game['code'],
+								empty($game['name'])
+									? NULL
+									: $game['name'],
+								empty($game['description'])
+									? NULL
+									: $game['description'],
+								empty($game['start'])
+									? NULL
+									: $game['start'],
+								empty($game['length'])
+									? NULL
+									: $game['length'],
+								empty($game['location'])
+									? NULL
+									: $game['location']
 						);
+						
+						// Ensure game code is unique
+						while (!empty($application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('code' => $gameModel->getCode())))) {
+							$gameModel->setCode();
+						}
 							
 						// Store game
 						$application['quest.orm.manager']->persist($gameModel);

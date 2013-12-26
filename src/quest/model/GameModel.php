@@ -66,7 +66,10 @@ class GameModel {
 		$location = NULL
 	) {
 		$this->id = $id;
-		$this->code = $code;
+		$this->code = 
+			empty($code)
+				? $this->generateRandomCode()
+				: $code;
 		$this->name = $name;
 		$this->description = $description;
 		$this->start =
@@ -121,7 +124,10 @@ class GameModel {
 	 * @param string $code
 	 */
 	public function setCode ($code = NULL) {
-		$this->code = $code;
+		$this->code = 
+			empty($code)
+				? $this->generateRandomCode()
+				: $code;
 	}
 	
 	/**
@@ -220,8 +226,32 @@ class GameModel {
 		$this->location = $location;
 	}
 	
-	private function generateCode () {
+	/**
+	 * Generate random code
+	 * 
+	 * @param integer $octetCount
+	 * @param integer $octetLength
+	 * @return string
+	 */
+	private function generateRandomCode ($octetCount = 4, $octetLength = 3) {
+		// List of characters
+		$character = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randomCode = '';
 		
+		// Loop through octet count
+		for ($i = 0; $i < $octetCount; $i++) {
+			// Loop through octet length
+			for ($j = 0; $j < $octetLength; $j++) {
+				// Pick random character and add to code
+				$randomCode .= $character[rand(0, strlen($character) - 1)];
+			}
+			
+			// Add a separator
+			$randomCode .= '-';
+		}
+		
+		// Take out the last seperator before returing
+		return substr($randomCode, 0, -1);
 	}
 	
 }
