@@ -226,6 +226,14 @@ class GameController implements ControllerInterface {
 		return new Response('ERROR: Bad request.', 400);
 	}
 	
+	/**
+	 * Remove game
+	 * 
+	 * @method DELETE
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
 	public function remove(Request $request, Application $application) {
 		// JSON and DELETE
 		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), 'DELETE') === 0) {
