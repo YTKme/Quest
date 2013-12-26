@@ -69,7 +69,10 @@ class GameController implements ControllerInterface {
 			} catch (DBALException $exception) {
 				return new Response('ERROR: Unable to add game.', 500);
 			} catch (Exception $exception) {
-				return new Response('ERROR: Failure.', 500);
+				return
+					$application['debug']
+						? new Response('ERROR: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
 			}
 			
 			return $application->json($gameArray, 201);
