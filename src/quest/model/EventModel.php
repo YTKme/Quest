@@ -59,7 +59,10 @@ class EventModel {
 		$length = NULL
 	) {
 		$this->id = $id;
-		$this->code = $code;
+		$this->code =
+			empty($code)
+				? $this->generateRandomCode()
+				: $code;
 		$this->name = $name;
 		$this->description = $description;
 		$this->start =
