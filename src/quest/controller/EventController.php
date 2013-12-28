@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\DBALException;
 
-class GameController implements ControllerInterface {
+class EventController implements ControllerInterface {
 
 	/**
 	 * Constructor
@@ -20,7 +20,7 @@ class GameController implements ControllerInterface {
 	}
 	
 	/**
-	 * Add game
+	 * Add event
 	 * 
 	 * @method POST
 	 * @param Request $request
@@ -39,32 +39,43 @@ class GameController implements ControllerInterface {
 			$request->request->replace(is_array($jsonData) ? $jsonData : array());
 			
 			try {
-				// Create an array to store the game created and read
-				$gameArray = array();
+				// Create an array to store the event created and read
+				$eventArray = array();
 			
-				foreach ($jsonData as $game) {
-					// Check if the game exist
-					if (!$gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('name' => $game['name']))) {
-						// Create game
-						$gameModel = new GameModel(
+				foreach ($jsonData as $event) {
+					// Check if the event exist
+					if (!$eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('name' => $event['name']))) {
+						// Create event
+						$eventModel = new EventModel(
 								NULL, // ID
-								empty($game['name'])
+								empty($event['code'])
 									? NULL
-									: $game['name'],
-								empty($game['description'])
+									: $event['code'],
+								empty($event['name'])
 									? NULL
-									: $game['description'],
-								empty($game['location'])
+									: $event['name'],
+								empty($event['description'])
 									? NULL
-									: $game['location']
+									: $event['description'],
+								empty($event['start'])
+									? NULL
+									: $event['start'],
+								empty($event['length'])
+									? NULL
+									: $event['length']
 						);
+						
+						// Ensure event code is unique
+						while (!empty($application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $eventModel->getCode())))) {
+							$eventModel->setCode();
+						}
 							
-						// Store game
-						$application['quest.orm.manager']->persist($gameModel);
+						// Store event
+						$application['quest.orm.manager']->persist($eventModel);
 					}
 						
-					// Push created and or read game into the array
-					array_push($gameArray, $gameModel->toArray());
+					// Push created and or read event into the array
+					array_push($eventArray, $eventModel->toArray());
 				}
 			
 				// Synchronize with database
@@ -73,7 +84,7 @@ class GameController implements ControllerInterface {
 				return
 					$application['debug']
 						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
-						: new Response('ERROR: Unable to add game.', 500);
+						: new Response('ERROR: Unable to add event.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
@@ -81,15 +92,15 @@ class GameController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($gameArray, 201);
+			return $application->json($eventArray, 201);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
-	 * Retrieve game
-	 * 
+	 * Retrieve event
+	 *
 	 * @method GET
 	 * @param Request $request
 	 * @param Application $application
@@ -99,35 +110,35 @@ class GameController implements ControllerInterface {
 		// JSON and GET
 		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
-				// Check if the game exist
-				if ($gameModels = $application['quest.orm.manager']->getRepository('GameModel')->findAll()) {
-					// Convert game object to array
-					foreach ($gameModels as $key => $value) {
-						$gameModels[$key] = $gameModels[$key]->toArray();
+				// Check if the event exist
+				if ($eventModels = $application['quest.orm.manager']->getRepository('EventModel')->findAll()) {
+					// Convert event object to array
+					foreach ($eventModels as $key => $value) {
+						$eventModels[$key] = $eventModels[$key]->toArray();
 					}
-						
-					return $application->json($gameModels, 200);
+	
+					return $application->json($eventModels, 200);
 				}
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
 						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
-						: new Response('ERROR: Unable to retrieve game.', 500);
+						: new Response('ERROR: Unable to retrieve event.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
 						? new Response('Exception: ' . $exception->getMessage(), 500)
 						: new Response('ERROR: Failure.', 500);
 			}
-				
-			return new Response('ERROR: Unable to retrieve game.', 404);
+	
+			return new Response('ERROR: Unable to retrieve event.', 404);
 		}
-		
+	
 		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
-	 * Edit game
+	 * Edit event
 	 *
 	 * @method PUT
 	 * @param Request $request
@@ -141,65 +152,75 @@ class GameController implements ControllerInterface {
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
 			}
-			
+				
 			// Parse JSON data
 			$request->request->replace(is_array($jsonData) ? $jsonData : array());
-			
+				
 			try {
-				// Create an array to store the game updated
-				$gameArray = array();
-				
-				foreach ($jsonData as $game) {
-					// Check if the game exist
-					if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $game['id']))) {
-						// Update game
-						$gameModel->setName(
-							empty($game['name'])
-								? $gameModel->getName()
-								: $game['name']
+				// Create an array to store the event updated
+				$eventArray = array();
+	
+				foreach ($jsonData as $event) {
+					// Check if the event exist
+					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
+						// Update event
+						$eventModel->setCode(
+								empty($event['code'])
+								? $eventModel->getCode()
+								: $event['code']
 						);
-						$gameModel->setDescription(
-							empty($game['description'])
-								? $gameModel->getDescription()
-								: $game['description']
+						$eventModel->setName(
+								empty($event['name'])
+								? $eventModel->getName()
+								: $event['name']
 						);
-						$gameModel->setLocation(
-							empty($game['location'])
-								? $gameModel->getLocation()
-								: $game['location']
+						$eventModel->setDescription(
+								empty($event['description'])
+								? $eventModel->getDescription()
+								: $event['description']
 						);
-						
-						// Update game
-						$application['quest.orm.manager']->persist($gameModel);
+						$eventModel->setStart(
+								empty($event['start'])
+								? $eventModel->getStart()
+								: $event['start']
+						);
+						$eventModel->setLength(
+								empty($event['length'])
+								? $eventModel->getLength()
+								: $event['length']
+						);
+	
+						// Update event
+						$application['quest.orm.manager']->persist($eventModel);
 					}
-					
-					// Push updated game into the array
-					array_push($gameArray, $gameModel->toArray());
+						
+					// Push updated event into the array
+					array_push($eventArray, $eventModel->toArray());
 				}
-				
+	
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
 						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
-						: new Response('ERROR: Unable to edit game.', 500);
+						: new Response('ERROR: Unable to edit event.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
 						? new Response('Exception: ' . $exception->getMessage(), 500)
 						: new Response('ERROR: Failure.', 500);
 			}
-			
-			return $application->json($gameArray, 200);
+				
+			return $application->json($eventArray, 200);
 		}
-		
+	
 		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
-	 * Remove game
-	 * 
+	 * Remove event
+	 *
 	 * @method DELETE
 	 * @param Request $request
 	 * @param Application $application
@@ -212,43 +233,43 @@ class GameController implements ControllerInterface {
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
 			}
-			
+				
 			// Parse JSON data
 			$request->request->replace(is_array($jsonData) ? $jsonData : array());
-			
+				
 			try {
-				// Create an array to store the game deleted
-				$gameArray = array();
-				
-				foreach ($jsonData as $game) {
-					// Check if the game exist
-					if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('code' => $game['code']))) {
-						// Delete game
-						$application['quest.orm.manager']->remove($gameModel);
+				// Create an array to store the event deleted
+				$eventArray = array();
+	
+				foreach ($jsonData as $event) {
+					// Check if the event exist
+					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
+						// Delete event
+						$application['quest.orm.manager']->remove($eventModel);
 					}
-					
-					// Push deleted game into the array
-					array_push($gameArray, $gameModel->toArray());
+						
+					// Push deleted event into the array
+					array_push($eventArray, $eventModel->toArray());
 				}
-				
+	
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
 						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
-						: new Response('ERROR: Unable to delete game.', 500);
+						: new Response('ERROR: Unable to delete event.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
 						? new Response('Exception: ' . $exception->getMessage(), 500)
 						: new Response('ERROR: Failure.', 500);
 			}
-			
-			return $application->json($gameArray, 200);
+				
+			return $application->json($eventArray, 200);
 		}
-		
+	
 		return new Response('ERROR: Bad request.', 400);
 	}
-
+	
 }
