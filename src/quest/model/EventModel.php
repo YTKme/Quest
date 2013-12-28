@@ -49,7 +49,6 @@ class EventModel {
 	 * @param string $description
 	 * @param string $start
 	 * @param string $length
-	 * @param string $location
 	 */
 	public function __construct (
 		$id = NULL,
