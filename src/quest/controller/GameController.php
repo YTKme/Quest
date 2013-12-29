@@ -171,10 +171,10 @@ class GameController implements ControllerInterface {
 						
 						// Update game
 						$application['quest.orm.manager']->persist($gameModel);
+
+						// Push updated game into the array
+						array_push($gameArray, $gameModel->toArray());
 					}
-					
-					// Push updated game into the array
-					array_push($gameArray, $gameModel->toArray());
 				}
 				
 				// Synchronize with database
@@ -222,13 +222,13 @@ class GameController implements ControllerInterface {
 				
 				foreach ($jsonData as $game) {
 					// Check if the game exist
-					if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('code' => $game['code']))) {
+					if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $game['id']))) {
 						// Delete game
 						$application['quest.orm.manager']->remove($gameModel);
+						
+						// Push deleted game into the array
+						array_push($gameArray, $gameModel->toArray());
 					}
-					
-					// Push deleted game into the array
-					array_push($gameArray, $gameModel->toArray());
 				}
 				
 				// Synchronize with database

@@ -1,3 +1,24 @@
+# Event
+api.event.add:
+  path: /event/add
+  defaults: { _controller: 'EventController::add' }
+  methods: [POST]
+
+api.event.retrieve:
+  path: /event/retrieve
+  defaults: { _controller: 'EventController::retrieve' }
+  methods: [GET]
+
+api.event.edit:
+  path: /event/edit
+  defaults: { _controller: 'EventController::edit' }
+  methods: [PUT]
+
+api.event.remove:
+  path: /event/remove
+  defaults: { _controller: 'EventController::remove' }
+  methods: [DELETE]
+
 # Game
 api.game.add:
   path: /game/add
@@ -17,6 +38,27 @@ api.game.edit:
 api.game.remove:
   path: /game/remove
   defaults: { _controller: 'GameController::remove' }
+  methods: [DELETE]
+
+# Achievement
+api.achievement.add:
+  path: /achievement/add
+  defaults: { _controller: 'AchievementController::add' }
+  methods: [POST]
+
+api.achievement.retrieve:
+  path: /achievement/retrieve
+  defaults: { _controller: 'AchievementController::retrieve' }
+  methods: [GET]
+
+api.achievement.edit:
+  path: /achievement/edit
+  defaults: { _controller: 'AchievementController::edit' }
+  methods: [PUT]
+
+api.achievement.remove:
+  path: /achievement/remove
+  defaults: { _controller: 'AchievementController::remove' }
   methods: [DELETE]
 
 api:

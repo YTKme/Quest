@@ -165,37 +165,37 @@ class EventController implements ControllerInterface {
 					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
 						// Update event
 						$eventModel->setCode(
-								empty($event['code'])
+							empty($event['code'])
 								? $eventModel->getCode()
 								: $event['code']
 						);
 						$eventModel->setName(
-								empty($event['name'])
+							empty($event['name'])
 								? $eventModel->getName()
 								: $event['name']
 						);
 						$eventModel->setDescription(
-								empty($event['description'])
+							empty($event['description'])
 								? $eventModel->getDescription()
 								: $event['description']
 						);
 						$eventModel->setStart(
-								empty($event['start'])
+							empty($event['start'])
 								? $eventModel->getStart()
 								: $event['start']
 						);
 						$eventModel->setLength(
-								empty($event['length'])
+							empty($event['length'])
 								? $eventModel->getLength()
 								: $event['length']
 						);
 	
 						// Update event
 						$application['quest.orm.manager']->persist($eventModel);
+
+						// Push updated event into the array
+						array_push($eventArray, $eventModel->toArray());
 					}
-						
-					// Push updated event into the array
-					array_push($eventArray, $eventModel->toArray());
 				}
 	
 				// Synchronize with database
@@ -246,10 +246,10 @@ class EventController implements ControllerInterface {
 					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
 						// Delete event
 						$application['quest.orm.manager']->remove($eventModel);
+
+						// Push deleted event into the array
+						array_push($eventArray, $eventModel->toArray());
 					}
-						
-					// Push deleted event into the array
-					array_push($eventArray, $eventModel->toArray());
 				}
 	
 				// Synchronize with database

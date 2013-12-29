@@ -2,6 +2,7 @@
 	{
 		"name": "Game I",
 		"description": "Game I",
-		"location": "SJC"
+		"start": "2013-12-25",
+		"length": "1:00:00"
 	}
 ]

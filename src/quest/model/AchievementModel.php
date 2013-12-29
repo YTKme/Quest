@@ -26,6 +26,11 @@ class AchievementModel {
 	protected $description = NULL;
 	
 	/**
+	 * @Column(name="picture")
+	 */
+	protected $picture = NULL;
+	
+	/**
 	 * @Column(name="latitude")
 	 */
 	protected $latitude = NULL;
@@ -54,6 +59,7 @@ class AchievementModel {
 		$id = NULL,
 		$name = NULL,
 		$description = NULL,
+		$picture = NULL,
 		$latitude = NULL,
 		$longitude = NULL,
 		$point = NULL
@@ -61,6 +67,7 @@ class AchievementModel {
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
+		$this->picture = $picture;
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->point = $point;
@@ -76,6 +83,7 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
+			'picture' => $this->getPicture(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint()
@@ -125,6 +133,24 @@ class AchievementModel {
 	 */
 	public function setDescription ($description = NULL) {
 		$this->description = $description;
+	}
+	
+	/**
+	 * Get picture
+	 * 
+	 * @return string
+	 */
+	public function getPicture () {
+		return $this->picture;
+	}
+	
+	/**
+	 * Set picture
+	 * 
+	 * @param string $picture
+	 */
+	public function setPicture ($picture = NULL) {
+		$this->picture = $picture;
 	}
 	
 	/**
