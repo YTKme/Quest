@@ -69,6 +69,11 @@ class EventController implements ControllerInterface {
 						while (!empty($application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $eventModel->getCode())))) {
 							$eventModel->setCode();
 						}
+						
+						// Check if the game exist
+						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
+							$eventModel->setGame($gameModel);
+						}
 							
 						// Store event
 						$application['quest.orm.manager']->persist($eventModel);
@@ -162,7 +167,7 @@ class EventController implements ControllerInterface {
 	
 				foreach ($jsonData as $event) {
 					// Check if the event exist
-					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
+					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('id' => $event['id']))) {
 						// Update event
 						$eventModel->setCode(
 							empty($event['code'])
@@ -189,6 +194,11 @@ class EventController implements ControllerInterface {
 								? $eventModel->getLength()
 								: $event['length']
 						);
+						
+						// Check if the game exist
+						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
+							$eventModel->setGame($gameModel);
+						}
 	
 						// Update event
 						$application['quest.orm.manager']->persist($eventModel);

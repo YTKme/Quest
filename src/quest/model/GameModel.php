@@ -1,6 +1,7 @@
 <?php
 
 use Doctrine\ORM\Id\SequenceGenerator;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Entity
@@ -31,6 +32,11 @@ class GameModel {
 	protected $location = NULL;
 	
 	/**
+	 * @OneToMany(targetEntity="EventModel", mappedBy="game")
+	 */
+	protected $events = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
@@ -48,6 +54,8 @@ class GameModel {
 		$this->name = $name;
 		$this->description = $description;
 		$this->location = $location;
+		
+		$this->events = new ArrayCollection();
 	}
 	
 	/**
@@ -125,6 +133,15 @@ class GameModel {
 	 */
 	public function setLocation ($location = NULL) {
 		$this->location = $location;
+	}
+	
+	/**
+	 * Get events
+	 * 
+	 * @return ArrayCollection
+	 */
+	public function getEvents () {
+		return $this->events;
 	}
 	
 }

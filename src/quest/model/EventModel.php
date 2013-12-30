@@ -41,6 +41,12 @@ class EventModel {
 	protected $length = NULL;
 	
 	/**
+	 * @ManyToOne(targetEntity="GameModel", inversedBy="events")
+	 * @JoinColumn(name="game_id", referencedColumnName="id")
+	 */
+	protected $game = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
@@ -87,7 +93,8 @@ class EventModel {
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
 			'start' => $this->getStart(),
-			'length' => $this->getLength()
+			'length' => $this->getLength(),
+			'game' => $this->getGame()
 		);
 	}
 	
@@ -197,6 +204,45 @@ class EventModel {
 			empty($length)
 				? NULL
 				: new DateTime($length);
+	}
+	
+	/**
+	 * Get game as array
+	 * 
+	 * @return array
+	 */
+	public function getGame () {
+		return $this->game->toArray();
+	}
+	
+	/**
+	 * Set game
+	 * 
+	 * @param string $game
+	 */
+	public function setGame ($game = NULL) {
+		// Check if the new game is NULL
+		if ($game === NULL) {
+			// Check if the game for this event is NULL
+			if ($this->game !== NULL) {
+				// Remove this event from the game
+				$this->game->getEvents()->removeElement($this);
+			}
+			
+			// Set the game for this event to NULL
+			$this->game = NULL;
+		} else {
+			// Check if the game for this event is NULL
+			if ($this->game !== NULL) {
+				// Remove this event from the game
+				$this->game->getEvents()->removeElement($this);
+			}
+			
+			// Set the game for this event
+			$this->game = $game;
+			// Add the event to the collection for the game
+			$game->getEvents()->add($this);
+		}
 	}
 	
 	/**
