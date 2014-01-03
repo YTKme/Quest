@@ -2,6 +2,10 @@
 	{
 		"name": "Game I",
 		"description": "Game I",
-		"location": "SJC"
+		"location": "SJC",
+		"achievements": [
+			{"id": "1"},
+			{"id": "2"}
+		]
 	}
 ]

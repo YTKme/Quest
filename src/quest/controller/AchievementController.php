@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\DBAL\DBALException;
 
 class AchievementController implements ControllerInterface {
 	
@@ -62,7 +63,12 @@ class AchievementController implements ControllerInterface {
 									? 0
 									: $achievement['point']
 						);
-							
+						
+						// Check if the game exist
+						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $achievement['game']))) {
+							$achievementModel->setGame($gameModel);
+						}
+						
 						// Store achievement
 						$application['quest.orm.manager']->persist($achievementModel);
 					}

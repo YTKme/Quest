@@ -94,7 +94,7 @@ class EventModel {
 			'description' => $this->getDescription(),
 			'start' => $this->getStart(),
 			'length' => $this->getLength(),
-			'game' => $this->getGame()
+			'game' => $this->getGame()->toArray()
 		);
 	}
 	
@@ -207,12 +207,12 @@ class EventModel {
 	}
 	
 	/**
-	 * Get game as array
+	 * Get game
 	 * 
-	 * @return array
+	 * @return GameModel
 	 */
 	public function getGame () {
-		return $this->game->toArray();
+		return $this->game;
 	}
 	
 	/**

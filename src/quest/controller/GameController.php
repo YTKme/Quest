@@ -58,6 +58,14 @@ class GameController implements ControllerInterface {
 									? NULL
 									: $game['location']
 						);
+						
+						// Loop through each achievement
+						foreach ($game['achievements'] as $achievement) {
+							// Check if the achievement exist
+							if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy($achievement)) {
+								$achievementModel->setGame($gameModel);
+							}
+						}
 							
 						// Store game
 						$application['quest.orm.manager']->persist($gameModel);

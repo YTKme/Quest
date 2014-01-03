@@ -46,6 +46,12 @@ class AchievementModel {
 	protected $point = NULL;
 	
 	/**
+	 * @ManyToOne(targetEntity="GameModel", inversedBy="achievements")
+	 * @JoinColumn(name="game_id", referencedColumnName="id")
+	 */
+	protected $game = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
@@ -79,6 +85,24 @@ class AchievementModel {
 	 * @return array
 	 */
 	public function toArray () {
+		return array(
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'description' => $this->getDescription(),
+			'picture' => $this->getPicture(),
+			'latitude' => $this->getLatitude(),
+			'longitude' => $this->getLongitude(),
+			'point' => $this->getPoint(),
+			'game' => $this->getGame()->toAchievementArray()
+		);
+	}
+	
+	/**
+	 * To game array
+	 * 
+	 * @return array
+	 */
+	public function toGameArray () {
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getName(),
@@ -205,6 +229,45 @@ class AchievementModel {
 	 */
 	public function setPoint ($point = NULL) {
 		$this->point = $point;
+	}
+	
+	/**
+	 * Get game
+	 * 
+	 * @return GameModel
+	 */
+	public function getGame () {
+		return $this->game;
+	}
+	
+	/**
+	 * Set game
+	 * 
+	 * @param string $game
+	 */
+	public function setGame ($game = NULL) {
+		// Check if the new game is NULL
+		if ($game === NULL) {
+			// Check if the game for this achievement is NULL
+			if ($this->game !== NULL) {
+				// Remove this achievement from the game
+				$this->game->getAchievements()->removeElement($this);
+			}
+				
+			// Set the game for this achievement to NULL
+			$this->game = NULL;
+		} else {
+			// Check if the game for this achievement is NULL
+			if ($this->game !== NULL) {
+				// Remove this achievement from the game
+				$this->game->getEvents()->removeElement($this);
+			}
+				
+			// Set the game for this achievement
+			$this->game = $game;
+			// Add the achievement to the collection for the game
+			$game->getAchievements()->add($this);
+		}
 	}
 	
 }

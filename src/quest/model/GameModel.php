@@ -32,6 +32,11 @@ class GameModel {
 	protected $location = NULL;
 	
 	/**
+	 * @OneToMany(targetEntity="AchievementModel", mappedBy="game")
+	 */
+	protected $achievements = NULL;
+	
+	/**
 	 * @OneToMany(targetEntity="EventModel", mappedBy="game")
 	 */
 	protected $events = NULL;
@@ -56,6 +61,7 @@ class GameModel {
 		$this->location = $location;
 		
 		$this->events = new ArrayCollection();
+		$this->achievements = new ArrayCollection();
 	}
 	
 	/**
@@ -64,6 +70,21 @@ class GameModel {
 	 * @return array
 	 */
 	public function toArray () {
+		return array(
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'description' => $this->getDescription(),
+			'location' => $this->getLocation(),
+			'achievements' => $this->getAchievementsArray()
+		);
+	}
+	
+	/**
+	 * To achievement array
+	 * 
+	 * @return array
+	 */
+	public function toAchievementArray () {
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getName(),
@@ -142,6 +163,34 @@ class GameModel {
 	 */
 	public function getEvents () {
 		return $this->events;
+	}
+	
+	/**
+	 * Get achievements
+	 * 
+	 * @return ArrayCollection
+	 */
+	public function getAchievements () {
+		return $this->achievements;
+	}
+	
+	/**
+	 * Get achievements array
+	 * 
+	 * @return array
+	 */
+	public function getAchievementsArray () {
+		// Create new achievement array
+		$achievementArray = array();
+		
+		// Loop through each achievement in the ArrayCollection
+		foreach ($this->achievements as $achievement) {
+			// Add each achievement to new achievement array
+			array_push($achievementArray, $achievement->toGameArray());
+		}
+		
+		// Return new achievement array
+		return $achievementArray;
 	}
 	
 }
