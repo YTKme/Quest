@@ -65,7 +65,7 @@ class AchievementController implements ControllerInterface {
 						);
 						
 						// Check if the game exist
-						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $achievement['game']))) {
+						if (!empty($achievement['game']) && $gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $achievement['game']))) {
 							$achievementModel->setGame($gameModel);
 						}
 						

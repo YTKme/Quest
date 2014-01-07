@@ -51,7 +51,18 @@ class TeamController implements ControllerInterface {
 								? 0
 								: $team['point']
 						);
-							
+						
+						// Check if the events exist
+						if (!empty($team['events'])) {
+							// Loop through each event
+							foreach ($team['events'] as $event) {
+								// Check if the event exist
+								if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy($event)) {
+									$teamModel->addEvent($eventModel);
+								}
+							}
+						}
+						
 						// Store team
 						$application['quest.orm.manager']->persist($teamModel);
 					}

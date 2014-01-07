@@ -8,13 +8,13 @@
 	"require": {
 		"silex/silex": "1.*",
 		"twig/twig": "1.*",
-		"symfony/config": "2.3.*",
-		"symfony/yaml": "2.3.*",
+		"symfony/config": "2.4.*",
+		"symfony/yaml": "2.4.*",
 		"doctrine/dbal": "2.4.*",
 		"doctrine/orm": "2.4.*"
 	},
 	"require-dev": {
-		"symfony/console": "2.3.*",
+		"symfony/console": "2.4.*",
 		"doctrine/migrations": "dev-master"
 	}
 }

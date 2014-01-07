@@ -15,10 +15,6 @@ class EventController implements ControllerInterface {
 
 	}
 	
-	public function main (Request $request, Application $application) {
-		return NULL;
-	}
-	
 	/**
 	 * Add event
 	 * 
@@ -71,8 +67,19 @@ class EventController implements ControllerInterface {
 						}
 						
 						// Check if the game exist
-						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
+						if (!empty($event['game']) && $gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
 							$eventModel->setGame($gameModel);
+						}
+						
+						// Check if the teams exist
+						if (!empty($event['teams'])) {
+							// Loop through each team
+							foreach ($event['teams'] as $team) {
+								// Check if the team exist
+								if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy($team)) {
+									$eventModel->addTeam($teamModel);
+								}
+							}
 						}
 							
 						// Store event

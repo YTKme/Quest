@@ -28,7 +28,7 @@ class TeamModel {
 	
 	/**
 	 * @ManyToMany(targetEntity="EventModel", inversedBy="teams")
-	 * @JoinTable(name="team_event")
+	 * @JoinTable(name="team_event", joinColumns={@JoinColumn(name="team_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="event_id", referencedColumnName="id")})
 	 */
 	protected $events = NULL;
 	

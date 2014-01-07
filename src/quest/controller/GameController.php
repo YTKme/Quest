@@ -15,10 +15,6 @@ class GameController implements ControllerInterface {
 
 	}
 	
-	public function main (Request $request, Application $application) {
-		return NULL;
-	}
-	
 	/**
 	 * Add game
 	 * 
@@ -59,11 +55,14 @@ class GameController implements ControllerInterface {
 									: $game['location']
 						);
 						
-						// Loop through each achievement
-						foreach ($game['achievements'] as $achievement) {
-							// Check if the achievement exist
-							if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy($achievement)) {
-								$achievementModel->setGame($gameModel);
+						// Check if the achievements exist
+						if (!empty($game['achievements'])) {
+							// Loop through each achievement
+							foreach ($game['achievements'] as $achievement) {
+								// Check if the achievement exist
+								if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy($achievement)) {
+									$achievementModel->setGame($gameModel);
+								}
 							}
 						}
 							

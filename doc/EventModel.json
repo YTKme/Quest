@@ -5,6 +5,9 @@
 		"description": "Game I",
 		"start": "2013-12-25",
 		"length": "1:00:00",
-		"game": "1"
+		"game": "1",
+		"teams": [
+			{"id": "1"}
+		]
 	}
 ]

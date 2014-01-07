@@ -1,6 +1,9 @@
 [
 	{
 		"name": "Team I",
-		"point": "0"
+		"point": "0",
+		"events":  [
+			{"id": "1"}
+		]
 	}
 ]

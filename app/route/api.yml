@@ -61,6 +61,27 @@ api.achievement.remove:
   defaults: { _controller: 'AchievementController::remove' }
   methods: [DELETE]
 
+# Team
+api.team.add:
+  path: /team/add
+  defaults: { _controller: 'TeamController::add' }
+  methods: [POST]
+
+api.team.retrieve:
+  path: /team/retrieve
+  defaults: { _controller: 'TeamController::retrieve' }
+  methods: [GET]
+
+api.team.edit:
+  path: /team/edit
+  defaults: { _controller: 'TeamController::edit' }
+  methods: [PUT]
+
+api.team.remove:
+  path: /team/remove
+  defaults: { _controller: 'TeamController::remove' }
+  methods: [DELETE]
+
 api:
   path: /
   defaults: { _controller: 'QuestController::main' }
