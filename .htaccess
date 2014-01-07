@@ -2,11 +2,11 @@
 	Options -MultiViews
 	
 	RewriteEngine On
-	RewriteBase /
+	RewriteBase /web
 	
 	# Stop execution if request is for an existing file or directory
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	
-	RewriteRule ^ web/index.php [L]
+	RewriteRule ^ index.php [L]
 </IfModule>
