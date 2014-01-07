@@ -150,6 +150,40 @@ class EventController implements ControllerInterface {
 	}
 	
 	/**
+	 * Retrieve event by code
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
+	public function retrieveByCode (Request $request, Application $application, $code) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the event exist
+				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $code))) {
+					return $application->json($eventModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve event.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
+			return new Response('ERROR: Unable to retrieve event.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
 	 * Edit event
 	 *
 	 * @method PUT
