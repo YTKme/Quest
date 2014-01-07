@@ -6,7 +6,6 @@
 	
 	# Stop execution if request is for an existing file or directory
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
 	
 	RewriteRule ^ index.php [L]
 </IfModule>
