@@ -5,5 +5,15 @@
 		"events":  [
 			{"id": "1"}
 		]
+	},
+	{
+		"name": "Team II",
+		"point": "0",
+		"events":  [
+			{"id": "1"}
+		],
+		"achievements": [
+			{"id": "1"}
+		]
 	}
 ]

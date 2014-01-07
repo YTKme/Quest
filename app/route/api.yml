@@ -35,6 +35,11 @@ api.game.retrieve:
   defaults: { _controller: 'GameController::retrieve' }
   methods: [GET]
 
+api.game.retrieve.id:
+  path: /game/retrieve/id/{id}
+  defaults: { _controller: 'GameController::retrieveById' }
+  methods: [GET]
+
 api.game.edit:
   path: /game/edit
   defaults: { _controller: 'GameController::edit' }
@@ -54,6 +59,11 @@ api.achievement.add:
 api.achievement.retrieve:
   path: /achievement/retrieve
   defaults: { _controller: 'AchievementController::retrieve' }
+  methods: [GET]
+
+api.achievement.retrieve.id:
+  path: /achievement/retrieve/id/{id}
+  defaults: { _controller: 'AchievementController::retrieveById' }
   methods: [GET]
 
 api.achievement.edit:

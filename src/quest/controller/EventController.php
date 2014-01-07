@@ -169,7 +169,7 @@ class EventController implements ControllerInterface {
 				return
 					$application['debug']
 						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
-						: new Response('ERROR: Unable to retrieve event.', 500);
+						: new Response('ERROR: Unable to retrieve event by code.', 500);
 			} catch (Exception $exception) {
 				return
 					$application['debug']
@@ -177,7 +177,7 @@ class EventController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return new Response('ERROR: Unable to retrieve event.', 404);
+			return new Response('ERROR: Unable to retrieve event by code.', 404);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

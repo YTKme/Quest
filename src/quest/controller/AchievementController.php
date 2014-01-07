@@ -148,6 +148,40 @@ class AchievementController implements ControllerInterface {
 	}
 	
 	/**
+	 * Retrieve achievement by ID
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
+	public function retrieveById (Request $request, Application $application, $id) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the achievement exist
+				if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $id))) {
+					return $application->json($achievementModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve achievement by ID.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
+			return new Response('ERROR: Unable to retrieve achievement by ID.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
 	 * Edit achievement
 	 * 
 	 * @method PUT
