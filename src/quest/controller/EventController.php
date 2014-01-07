@@ -43,22 +43,22 @@ class EventController implements ControllerInterface {
 					if (!$eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('name' => $event['name']))) {
 						// Create event
 						$eventModel = new EventModel(
-								NULL, // ID
-								empty($event['code'])
-									? NULL
-									: $event['code'],
-								empty($event['name'])
-									? NULL
-									: $event['name'],
-								empty($event['description'])
-									? NULL
-									: $event['description'],
-								empty($event['start'])
-									? NULL
-									: $event['start'],
-								empty($event['length'])
-									? NULL
-									: $event['length']
+							NULL, // ID
+							empty($event['code'])
+								? NULL
+								: $event['code'],
+							empty($event['name'])
+								? NULL
+								: $event['name'],
+							empty($event['description'])
+								? NULL
+								: $event['description'],
+							empty($event['start'])
+								? NULL
+								: $event['start'],
+							empty($event['length'])
+								? NULL
+								: $event['length']
 						);
 						
 						// Ensure event code is unique

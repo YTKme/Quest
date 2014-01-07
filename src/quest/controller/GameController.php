@@ -43,16 +43,16 @@ class GameController implements ControllerInterface {
 					if (!$gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('name' => $game['name']))) {
 						// Create game
 						$gameModel = new GameModel(
-								NULL, // ID
-								empty($game['name'])
-									? NULL
-									: $game['name'],
-								empty($game['description'])
-									? NULL
-									: $game['description'],
-								empty($game['location'])
-									? NULL
-									: $game['location']
+							NULL, // ID
+							empty($game['name'])
+								? NULL
+								: $game['name'],
+							empty($game['description'])
+								? NULL
+								: $game['description'],
+							empty($game['location'])
+								? NULL
+								: $game['location']
 						);
 						
 						// Check if the achievements exist

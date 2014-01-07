@@ -52,6 +52,11 @@ class AchievementModel {
 	protected $game = NULL;
 	
 	/**
+	 * @ManyToMany(targetEntity="TeamModel", mappedBy="achievements")
+	 */
+	protected $teams = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
@@ -93,7 +98,9 @@ class AchievementModel {
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint(),
-			'game' => $this->getGame()->toAchievementArray()
+			'game' => empty($this->getGame())
+				? NULL
+				: $this->getGame()->toAchievementArray()
 		);
 	}
 	
@@ -268,6 +275,34 @@ class AchievementModel {
 			// Add the achievement to the collection for the game
 			$game->getAchievements()->add($this);
 		}
+	}
+	
+	/**
+	 * Get teams
+	 * 
+	 * @return array
+	 */
+	public function getTeams () {
+		// Create new team array
+		$teamArray = array();
+	
+		// Loop through each team in the ArrayCollection
+		foreach ($this->teams as $team) {
+			// Add each team to new team array
+			array_push($teamArray, $team->toArray());
+		}
+	
+		// Return new team array
+		return $teamArray;
+	}
+	
+	/**
+	 * Add team
+	 * 
+	 * @param TeamModel $team
+	 */
+	public function addTeam (TeamModel $team = NULL) {
+		$this->teams[] = $team;
 	}
 	
 }

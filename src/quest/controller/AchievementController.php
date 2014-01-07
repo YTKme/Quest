@@ -43,30 +43,41 @@ class AchievementController implements ControllerInterface {
 					if (!$achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('name' => $achievement['name']))) {
 						// Create achievement
 						$achievementModel = new AchievementModel(
-								NULL, // ID
-								empty($achievement['name'])
-									? NULL
-									: $achievement['name'],
-								empty($achievement['description'])
-									? NULL
-									: $achievement['description'],
-								empty($achievement['picture'])
-									? NULL
-									: $achievement['picture'],
-								empty($achievement['latitude'])
-									? NULL
-									: $achievement['latitude'],
-								empty($achievement['longitude'])
-									? NULL
-									: $achievement['longitude'],
-								empty($achievement['point'])
-									? 0
-									: $achievement['point']
+							NULL, // ID
+							empty($achievement['name'])
+								? NULL
+								: $achievement['name'],
+							empty($achievement['description'])
+								? NULL
+								: $achievement['description'],
+							empty($achievement['picture'])
+								? NULL
+								: $achievement['picture'],
+							empty($achievement['latitude'])
+								? NULL
+								: $achievement['latitude'],
+							empty($achievement['longitude'])
+								? NULL
+								: $achievement['longitude'],
+							empty($achievement['point'])
+								? 0
+								: $achievement['point']
 						);
 						
 						// Check if the game exist
 						if (!empty($achievement['game']) && $gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $achievement['game']))) {
 							$achievementModel->setGame($gameModel);
+						}
+						
+						// Check if the teams exist
+						if (!empty($event['teams'])) {
+							// Loop through each team
+							foreach ($event['teams'] as $team) {
+								// Check if the team exist
+								if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy($team)) {
+									$eventModel->addTeam($teamModel);
+								}
+							}
 						}
 						
 						// Store achievement
