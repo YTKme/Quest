@@ -7,5 +7,13 @@
 			{"id": "1"},
 			{"id": "2"}
 		]
+	},
+	{
+		"name": "Game II",
+		"description": "Game II",
+		"location": "SJC",
+		"achievements": [
+			{"id": "3"}
+		]
 	}
 ]
