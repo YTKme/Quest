@@ -15,17 +15,27 @@
  ###################}
 {% block jshead %}{% endblock %}
 
-{###########
- # Heading #
- ###########}
-{% block heading %}Home{% endblock %}
-
 {########
  # Body #
  ########}
 {% block body %}
 
+<header class="page-header container frmLoginHeader">
+	<h2>Login</h2>
+</header>
+
 <aside>
+	<form id="frmLogin" class="frmLogin" role="form" action="{{  }}" method="post">
+		<div class="form-group">
+			<label for="txtUsername">Username</label>
+			<input id="txtUsername" class="form-control" name="txtUsername" type="text" placeholder="Username" required="required" autofocus="autofocus">
+		</div>
+		<div class="form-group">
+			<label for="txtPassword">Password</label>
+			<input id="txtPassword" class="form-control" name="txtPassword" type="password" placeholder="Password" required="required">
+		</div>
+		<div class="textCenter"><button type="submit" class="btn btn-primary btn-lg">Login</button></div>
+	</form>
 </aside>
 		
 {% endblock %}
