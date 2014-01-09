@@ -7,11 +7,14 @@
 		<title>Quest - {% block title %}Quest{% endblock %}</title>
 		
 		<!-- Cascading Style Sheet Head -->
-		<link rel="stylesheet" type="text/css" media="all" href="{{ RESOURCE }}/bootstrap-3.0.3/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="{{ RESOURCE }}/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet/less" type="text/css" media="all" href="{{ RESOURCE }}/css/main.less" />
 		{% block csshead %}{% endblock %}
 		
 		<!-- JavaScript Head -->
-		<script type="text/javascript" src="{{ RESOURCE }}/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/js/less-1.6.0.min.js"></script>
 		{% block jshead %}{% endblock %}
 		
 	</head>
@@ -19,7 +22,27 @@
 	<body>
 	
 		<header>
-			<h1>Quest</h1>
+			<h1 class="hide">Quest</h1>
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<!-- Mobile Display With Title -->
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navigationHead">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/">Quest</a>
+					</div>
+					<div id="navigationHead" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="/">Home</a></li>
+							<li><a href="/">Home</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 		</header>
 		
 		<header class="page-header container">
