@@ -62,6 +62,7 @@ class AchievementModel {
 	 * @param string $id
 	 * @param string $name
 	 * @param string $description
+	 * @param string $picture
 	 * @param string $latitude
 	 * @param string $longitude
 	 * @param string $point

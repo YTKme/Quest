@@ -14,7 +14,7 @@ class TeamModel {
 	 * @Column(name="id", type="smallint", options={"unsigned"=true})
 	 * @GeneratedValue(strategy="AUTO")
 	 */
-	protected $id;
+	protected $id = NULL;
 	
 	/**
 	 * @Column(name="name", unique=true)
