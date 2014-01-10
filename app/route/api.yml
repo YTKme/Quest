@@ -1,3 +1,24 @@
+# User
+api.user.add:
+  path: /user/add
+  defaults: { _controller: 'UserController::add' }
+  methods: [POST]
+
+api.user.retrieve:
+  path: /user/retrieve
+  defaults: { _controller: 'UserController::retrieve' }
+  methods: [GET]
+
+api.user.edit:
+  path: /user/edit
+  defaults: { _controller: 'UserController::edit' }
+  methods: [PUT]
+
+api.user.remove:
+  path: /user/remove
+  defaults: { _controller: 'UserController::remove' }
+  methods: [DELETE]
+
 # Event
 api.event.add:
   path: /event/add

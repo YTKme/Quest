@@ -41,11 +41,26 @@ class UserModel {
 	public function __construct (
 		$id = NULL,
 		$username = NULL,
-		$password = NULL
+		$password = NULL,
+		$role = NULL
 	) {
 		$this->id = $id;
 		$this->username = $username;
-		$this->password = $password;
+		$this->password = hash('sha256', hash('sha256', $password) . $this->getUsername());
+		$this->role = $role;
+	}
+	
+	/**
+	 * To array
+	 * 
+	 * @return array
+	 */
+	public function toArray () {
+		return array(
+			'id' => $this->getId(),
+			'username' => $this->getUsername(),
+			'role' => $this->getRole()
+		);
 	}
 	
 	/**
@@ -90,7 +105,7 @@ class UserModel {
 	 * @param string $password
 	 */
 	public function setPassword ($password = NULL) {
-		$this->password = $password;
+		$this->password = hash('sha256', hash('sha256', $password) . $this->getUsername());
 	}
 	
 	/**
