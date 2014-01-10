@@ -32,6 +32,16 @@ class UserModel {
 	protected $role = NULL;
 	
 	/**
+	 * @Column(name="first_name")
+	 */
+	protected $firstName = NULL;
+	
+	/**
+	 * @Column(name="last_name")
+	 */
+	protected $lastName = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
@@ -42,12 +52,16 @@ class UserModel {
 		$id = NULL,
 		$username = NULL,
 		$password = NULL,
-		$role = NULL
+		$role = NULL,
+		$firstName = NULL,
+		$lastName = NULL
 	) {
 		$this->id = $id;
 		$this->username = $username;
 		$this->password = hash('sha256', hash('sha256', $password) . $this->getUsername());
 		$this->role = $role;
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
 	}
 	
 	/**
@@ -59,7 +73,9 @@ class UserModel {
 		return array(
 			'id' => $this->getId(),
 			'username' => $this->getUsername(),
-			'role' => $this->getRole()
+			'role' => $this->getRole(),
+			'firstName' => $this->getFirstName(),
+			'lastName' => $this->getLastName()
 		);
 	}
 	
@@ -124,6 +140,42 @@ class UserModel {
 	 */
 	public function setRole ($role = NULL) {
 		$this->role = $role;
+	}
+	
+	/**
+	 * Get first name
+	 * 
+	 * @return string
+	 */
+	public function getFirstName () {
+		return $this->firstName;
+	}
+	
+	/**
+	 * Set first name
+	 * 
+	 * @param string $firstName
+	 */
+	public function setFirstName ($firstName = NULL) {
+		$this->firstName = $firstName;
+	}
+	
+	/**
+	 * Get last name
+	 * 
+	 * @return string
+	 */
+	public function getLastName () {
+		return $this->lastName;
+	}
+	
+	/**
+	 * Set last name
+	 * 
+	 * @param string $lastName
+	 */
+	public function setLastName ($lastName = NULL) {
+		$this->lastName = $lastName;
 	}
 	
 }

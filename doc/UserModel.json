@@ -2,6 +2,8 @@
 	{
 		"username": "ytk",
 		"password": "ytk",
-		"role": "ADMINISTRATOR"
+		"role": "ADMINISTRATOR",
+		"firstName": "Yan",
+		"lastName": "Kuang"
 	}
 ]

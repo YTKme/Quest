@@ -52,7 +52,13 @@ class UserController implements ControllerInterface {
 								: $user['password'],
 							empty($user['role'])
 								? NULL
-								: $user['role']
+								: $user['role'],
+							empty($user['firstName'])
+								? NULL
+								: $user['firstName'],
+							empty($user['lastName'])
+								? NULL
+								: $user['lastName']
 						);
 			
 						// Store user
@@ -164,7 +170,17 @@ class UserController implements ControllerInterface {
 								? $userModel->getRole()
 								: $user['role']
 						);
-							
+						$userModel->setFirstName(
+							empty($user['firstName'])
+								? $userModel->getFirstName()
+								: $user['firstName']
+						);
+						$userModel->setLastName(
+							empty($user['lastName'])
+								? $userModel->getLastName()
+								: $user['lastName']
+						);
+						
 						// Update user
 						$application['quest.orm.manager']->persist($userModel);
 							
