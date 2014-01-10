@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{#########
+ # Title #
+ #########}
+{% block title %}Main{% endblock %}
+
+{##############################
+ # Cascading Style Sheet Head #
+ ##############################}
+{% block csshead %}{% endblock %}
+
+{###################
+ # JavaScript Head #
+ ###################}
+{% block jshead %}{% endblock %}
+
+{########
+ # Body #
+ ########}
+{% block body %}
+
+<header class="page-header container">
+	<h2>CISCO Quest</h2>
+</header>
+
+<aside>
+	<section class="list-group">
+		<a href="{{ HOST }}/user" class="list-group-item">
+			<h4 class="list-group-item-heading">User</h4>
+			<p class="list-group-item-text">User Management</p>
+		</a>
+		<a href="{{ HOST }}/event" class="list-group-item">
+			<h4 class="list-group-item-heading">Team</h4>
+			<p class="list-group-item-text">Team Management</p>
+		</a>
+		<a href="{{ HOST }}/event" class="list-group-item">
+			<h4 class="list-group-item-heading">Event</h4>
+			<p class="list-group-item-text">Event Management</p>
+		</a>
+		<a href="{{ HOST }}/game" class="list-group-item">
+			<h4 class="list-group-item-heading">Game</h4>
+			<p class="list-group-item-text">Game Management</p>
+		</a>
+		<a href="{{ HOST }}/achievement" class="list-group-item">
+			<h4 class="list-group-item-heading">Achievement</h4>
+			<p class="list-group-item-text">Achievement Management</p>
+		</a>
+	</section>
+</aside>
+		
+{% endblock %}
+
+{###################
+ # JavaScript Tail #
+ ###################}
+{% block jstail %}{% endblock %}
