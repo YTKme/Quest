@@ -39,6 +39,11 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="{{ HOST }}/">Home</a></li>
 						</ul>
+						{% if _USERNAME %}
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="{{ HOST }}/logout">Logout</a></li>
+						</ul>
+						{% endif %}
 					</div>
 				</div>
 			</nav>

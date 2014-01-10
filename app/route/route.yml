@@ -6,6 +6,14 @@ login:
   path: /login
   defaults: { _controller: 'AuthenticationController::login' }
 
+logout:
+  path: /logout
+  defaults: { _controller: 'AuthenticationController::logout' }
+
+main:
+  path: /main
+  defaults: { _controller: 'MainController::main' }
+
 # Home
 home:
   path: /home
