@@ -2,6 +2,10 @@ api:
   prefix: /api
   resource: api.yml
 
+login:
+  path: /login
+  defaults: { _controller: 'AuthenticationController::login' }
+
 # Home
 home:
   path: /home
