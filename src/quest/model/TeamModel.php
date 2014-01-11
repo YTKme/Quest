@@ -33,10 +33,9 @@ class TeamModel {
 	protected $events = NULL;
 	
 	/**
-	 * @ManyToMany(targetEntity="AchievementModel", inversedBy="teams")
-	 * @JoinTable(name="team_achievement", joinColumns={@JoinColumn(name="team_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="achievement_id", referencedColumnName="id")})
+	 * @OneToMany(targetEntity="TeamAchievementModel", mappedBy="team")
 	 */
-	protected $achievements = NULL;
+	protected $teamAchievements = NULL;
 	
 	/**
 	 * Constructor
@@ -145,38 +144,6 @@ class TeamModel {
 		
 		// Add event to the ArrayCollection
 		$this->events[] = $event;
-	}
-	
-	/**
-	 * Get achievements
-	 * 
-	 * @return array
-	 */
-	public function getAchievements () {
-		// Create new achievement array
-		$achievementArray = array();
-		
-		// Loop through each achievement in the ArrayCollection
-		foreach ($this->achievements as $achievement) {
-			// Add each achievement to new achievement array
-			array_push($achievementArray, $achievement->toArray());
-		}
-		
-		// Return new achievement array
-		return $achievementArray;
-	}
-	
-	/**
-	 * Add achievement
-	 * 
-	 * @param AchievementModel $achievement
-	 */
-	public function addAchievement (AchievementModel $achievement = NULL) {
-		// Synchronously updating inverse side
-		$achievement->addTeam($this);
-		
-		// Add achievement to the ArrayCollection
-		$this->achievements[] = $achievement;
 	}
 	
 }

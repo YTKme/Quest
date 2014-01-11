@@ -26,11 +26,6 @@ class AchievementModel {
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="picture")
-	 */
-	protected $picture = NULL;
-	
-	/**
 	 * @Column(name="latitude")
 	 */
 	protected $latitude = NULL;
@@ -52,9 +47,9 @@ class AchievementModel {
 	protected $game = NULL;
 	
 	/**
-	 * @ManyToMany(targetEntity="TeamModel", mappedBy="achievements")
+	 * @OneToMany(targetEntity="TeamAchievementModel", mappedBy="achievement")
 	 */
-	protected $teams = NULL;
+	protected $teamAchievements = NULL;
 	
 	/**
 	 * Constructor
@@ -71,7 +66,6 @@ class AchievementModel {
 		$id = NULL,
 		$name = NULL,
 		$description = NULL,
-		$picture = NULL,
 		$latitude = NULL,
 		$longitude = NULL,
 		$point = NULL
@@ -79,7 +73,6 @@ class AchievementModel {
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
-		$this->picture = $picture;
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->point = $point;
@@ -95,7 +88,6 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
-			'picture' => $this->getPicture(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint(),
@@ -115,7 +107,6 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
-			'picture' => $this->getPicture(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint()
@@ -165,24 +156,6 @@ class AchievementModel {
 	 */
 	public function setDescription ($description = NULL) {
 		$this->description = $description;
-	}
-	
-	/**
-	 * Get picture
-	 * 
-	 * @return string
-	 */
-	public function getPicture () {
-		return $this->picture;
-	}
-	
-	/**
-	 * Set picture
-	 * 
-	 * @param string $picture
-	 */
-	public function setPicture ($picture = NULL) {
-		$this->picture = $picture;
 	}
 	
 	/**
@@ -276,34 +249,6 @@ class AchievementModel {
 			// Add the achievement to the collection for the game
 			$game->getAchievements()->add($this);
 		}
-	}
-	
-	/**
-	 * Get teams
-	 * 
-	 * @return array
-	 */
-	public function getTeams () {
-		// Create new team array
-		$teamArray = array();
-	
-		// Loop through each team in the ArrayCollection
-		foreach ($this->teams as $team) {
-			// Add each team to new team array
-			array_push($teamArray, $team->toArray());
-		}
-	
-		// Return new team array
-		return $teamArray;
-	}
-	
-	/**
-	 * Add team
-	 * 
-	 * @param TeamModel $team
-	 */
-	public function addTeam (TeamModel $team = NULL) {
-		$this->teams[] = $team;
 	}
 	
 }
