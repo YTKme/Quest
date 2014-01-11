@@ -70,9 +70,9 @@ class AchievementController implements ControllerInterface {
 							empty($achievement['description'])
 								? NULL
 								: $achievement['description'],
-							empty($achievement['picture'])
+							empty($achievement['icon'])
 								? NULL
-								: $achievement['picture'],
+								: $achievement['icon'],
 							empty($achievement['latitude'])
 								? NULL
 								: $achievement['latitude'],
@@ -238,10 +238,10 @@ class AchievementController implements ControllerInterface {
 								? $achievementModel->getDescription()
 								: $achievement['description']
 						);
-						$achievementModel->setPicture(
-							empty($achievement['picture'])
-								? $achievementModel->getPicture()
-								: $achievement['picture']
+						$achievementModel->setIcon(
+							empty($achievement['icon'])
+								? $achievementModel->getIcon()
+								: $achievement['icon']
 						);
 						$achievementModel->setLatitude(
 							empty($achievement['latitude'])

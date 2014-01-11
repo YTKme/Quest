@@ -54,6 +54,7 @@ class TeamModel {
 		$this->point = $point;
 		
 		$this->events = new ArrayCollection();
+		$this->teamAchievements = new ArrayCollection();
 	}
 	
 	/**
@@ -65,7 +66,8 @@ class TeamModel {
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getName(),
-			'point' => $this->getPoint()
+			'point' => $this->getPoint(),
+			'teamAchievements' => $this->getTeamAchievements()
 		);
 	}
 	
@@ -144,6 +146,25 @@ class TeamModel {
 		
 		// Add event to the ArrayCollection
 		$this->events[] = $event;
+	}
+	
+	/**
+	 * Get team achievements
+	 * 
+	 * @return array
+	 */
+	public function getTeamAchievements () {
+		// Create new team achievement array
+		$teamAchievementArray = array();
+		
+		// Loop through each team achievement in the ArrayCollection
+		foreach ($this->achievements as $teamAchievement) {
+			// Add each team achievement to new team achievement array
+			array_push($teamAchievementArray, $teamAchievement->toArray());
+		}
+		
+		// Return new team achievement array
+		return $teamAchievementArray;
 	}
 	
 }

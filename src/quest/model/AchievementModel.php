@@ -26,6 +26,11 @@ class AchievementModel {
 	protected $description = NULL;
 	
 	/**
+	 * @Column(name="icon")
+	 */
+	protected $icon = NULL;
+	
+	/**
 	 * @Column(name="latitude")
 	 */
 	protected $latitude = NULL;
@@ -66,6 +71,7 @@ class AchievementModel {
 		$id = NULL,
 		$name = NULL,
 		$description = NULL,
+		$icon = NULL,
 		$latitude = NULL,
 		$longitude = NULL,
 		$point = NULL
@@ -73,6 +79,7 @@ class AchievementModel {
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
+		$this->icon = $icon;
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->point = $point;
@@ -88,6 +95,7 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
+			'icon' => $this->getIcon(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint(),
@@ -107,6 +115,7 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
+			'icon' => $this->getIcon(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint()
@@ -156,6 +165,24 @@ class AchievementModel {
 	 */
 	public function setDescription ($description = NULL) {
 		$this->description = $description;
+	}
+	
+	/**
+	 * Get icon
+	 * 
+	 * @return string
+	 */
+	public function getIcon () {
+		return $this->icon;
+	}
+	
+	/**
+	 * Set icon
+	 * 
+	 * @param string $icon
+	 */
+	public function setIcon ($icon = NULL) {
+		$this->icon = $icon;
 	}
 	
 	/**
