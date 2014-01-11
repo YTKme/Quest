@@ -8,14 +8,19 @@
 		
 		<!-- Cascading Style Sheet Head -->
 		<link rel="stylesheet" type="text/css" media="all" href="{{ RESOURCE }}/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="{{ RESOURCE }}/jqueryui/css/smoothness/jquery-ui-1.10.3.custom.min.css" />
 		<link rel="stylesheet/less" type="text/css" media="all" href="{{ RESOURCE }}/css/main.less" />
 		{% block csshead %}{% endblock %}
 		
 		<!-- JavaScript Head -->
 		<script type="text/javascript" src="{{ RESOURCE }}/js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/js/less-1.6.0.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
 		{% block jshead %}{% endblock %}
+		
+		{% block mischead %}{% endblock %}
 		
 	</head>
 	

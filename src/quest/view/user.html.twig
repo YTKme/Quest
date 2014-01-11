@@ -3,7 +3,7 @@
 {#########
  # Title #
  #########}
-{% block title %}Main{% endblock %}
+{% block title %}User{% endblock %}
 
 {##############################
  # Cascading Style Sheet Head #
@@ -15,6 +15,16 @@
  ###################}
 {% block jshead %}{% endblock %}
 
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/datatables.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/user.js"></script>
+{% endblock %}
+
 {########
  # Body #
  ########}
@@ -25,6 +35,30 @@
 </header>
 
 <aside>
+	<p><button id="btnAddUser" class="btn btn-success" type="button">Add User</button></p>
+	<table id="dTable" class="table tblUser">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Role</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<button id="btnEditUser-0" class="btn btn-primary btnEditUser" type="button">Edit User</button>
+					<button id="btnRemoveUser-0" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </aside>
 		
 {% endblock %}

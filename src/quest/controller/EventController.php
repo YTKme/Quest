@@ -16,6 +16,26 @@ class EventController implements ControllerInterface {
 	}
 	
 	/**
+	 * Main
+	 * @param Request $request
+	 * @param Application $application
+	 * @return mixed
+	 */
+	public function main (Request $request, Application $application) {
+		$host = $request->getSchemeAndHttpHost();
+		$sessionUsername = $application['session']->get('_USERNAME');
+	
+		// Validate user login
+		if (empty($application['session']->get('_USERNAME'))) {
+			//return new RedirectResponse($host);
+		}
+	
+		return $application['twig']->render('event.html.twig', array(
+			'_USERNAME' => $sessionUsername
+		));
+	}
+	
+	/**
 	 * Add event
 	 * 
 	 * @method POST

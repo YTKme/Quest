@@ -14,6 +14,26 @@ main:
   path: /main
   defaults: { _controller: 'MainController::main' }
 
+user:
+  path: /user
+  defaults: { _controller: 'UserController::main' }
+
+team:
+  path: /team
+  defaults: { _controller: 'TeamController::main' }
+
+event:
+  path: /event
+  defaults: { _controller: 'EventController::main' }
+
+game:
+  path: /game
+  defaults: { _controller: 'GameController::main' }
+
+achievement:
+  path: /achievement
+  defaults: { _controller: 'AchievementController::main' }
+
 # Home
 home:
   path: /home
