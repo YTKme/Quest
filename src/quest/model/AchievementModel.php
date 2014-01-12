@@ -251,9 +251,9 @@ class AchievementModel {
 	/**
 	 * Set game
 	 * 
-	 * @param string $game
+	 * @param GameModel $game
 	 */
-	public function setGame ($game = NULL) {
+	public function setGame (GameModel $game = NULL) {
 		// Check if the new game is NULL
 		if ($game === NULL) {
 			// Check if the game for this achievement is NULL

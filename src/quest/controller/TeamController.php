@@ -83,17 +83,6 @@ class TeamController implements ControllerInterface {
 							}
 						}
 						
-						// Check if the achievements exist
-						if (!empty($team['achievements'])) {
-							// Loop through each event
-							foreach ($team['achievements'] as $achievement) {
-								// Check if the achievement exist
-								if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy($achievement)) {
-									$teamModel->addAchievement($achievementModel);
-								}
-							}
-						}
-						
 						// Store team
 						$application['quest.orm.manager']->persist($teamModel);
 					}
