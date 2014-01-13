@@ -42,11 +42,20 @@ class UserModel {
 	protected $lastName = NULL;
 	
 	/**
+	 * @Column(name="last_login")
+	 */
+	protected $lastLogin = NULL;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param string $id
 	 * @param string $username
 	 * @param string $password
+	 * @param string $role
+	 * @param string $firstName
+	 * @param string $lastName
+	 * @param string $lastLogin
 	 */
 	public function __construct (
 		$id = NULL,
@@ -54,7 +63,8 @@ class UserModel {
 		$password = NULL,
 		$role = NULL,
 		$firstName = NULL,
-		$lastName = NULL
+		$lastName = NULL,
+		$lastLogin = NULL
 	) {
 		$this->id = $id;
 		$this->username = $username;
@@ -62,6 +72,10 @@ class UserModel {
 		$this->role = $role;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
+		$this->lastLogin =
+			empty($lastLogin)
+				? NULL
+				: new DateTime($lastLogin);
 	}
 	
 	/**
@@ -75,7 +89,8 @@ class UserModel {
 			'username' => $this->getUsername(),
 			'role' => $this->getRole(),
 			'firstName' => $this->getFirstName(),
-			'lastName' => $this->getLastName()
+			'lastName' => $this->getLastName(),
+			'lastLogin' => $this->getLastLogin()
 		);
 	}
 	
@@ -176,6 +191,27 @@ class UserModel {
 	 */
 	public function setLastName ($lastName = NULL) {
 		$this->lastName = $lastName;
+	}
+	
+	/**
+	 * Get last login
+	 * 
+	 * @return DateTime
+	 */
+	public function getLastLogin () {
+		return $this->lastLogin;
+	}
+	
+	/**
+	 * Set last login
+	 * 
+	 * @param string $lastLogin
+	 */
+	public function setLastLogin ($lastLogin = NULL) {
+		$this->lastLogin =
+			empty($lastLogin)
+				? NULL
+				: new DateTime($lastLogin);
 	}
 	
 }
