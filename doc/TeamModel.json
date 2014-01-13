@@ -1,18 +1,12 @@
 [
 	{
 		"name": "Team I",
-		"point": "0",
-		"events":  [
-			{"id": "1"}
-		]
+		"point": "0"
 	},
 	{
 		"name": "Team II",
 		"point": "0",
 		"events":  [
-			{"id": "1"}
-		],
-		"achievements": [
 			{"id": "1"}
 		]
 	}

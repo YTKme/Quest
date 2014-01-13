@@ -33,10 +33,9 @@ class TeamModel {
 	protected $events = NULL;
 	
 	/**
-	 * @ManyToMany(targetEntity="AchievementModel", inversedBy="teams")
-	 * @JoinTable(name="team_achievement", joinColumns={@JoinColumn(name="team_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="achievement_id", referencedColumnName="id")})
+	 * @OneToMany(targetEntity="TeamAchievementModel", mappedBy="team")
 	 */
-	protected $achievements = NULL;
+	protected $teamAchievements = NULL;
 	
 	/**
 	 * Constructor
@@ -55,6 +54,7 @@ class TeamModel {
 		$this->point = $point;
 		
 		$this->events = new ArrayCollection();
+		$this->teamAchievements = new ArrayCollection();
 	}
 	
 	/**
@@ -63,6 +63,20 @@ class TeamModel {
 	 * @return array
 	 */
 	public function toArray () {
+		return array(
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'point' => $this->getPoint(),
+			'teamAchievements' => $this->getTeamAchievementsArray()
+		);
+	}
+	
+	/**
+	 * To team achievement array
+	 * 
+	 * @return array
+	 */
+	public function toTeamAchievementArray () {
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getName(),
@@ -148,35 +162,31 @@ class TeamModel {
 	}
 	
 	/**
-	 * Get achievements
+	 * Get team achievements
 	 * 
-	 * @return array
+	 * @return ArrayCollection
 	 */
-	public function getAchievements () {
-		// Create new achievement array
-		$achievementArray = array();
-		
-		// Loop through each achievement in the ArrayCollection
-		foreach ($this->achievements as $achievement) {
-			// Add each achievement to new achievement array
-			array_push($achievementArray, $achievement->toArray());
-		}
-		
-		// Return new achievement array
-		return $achievementArray;
+	public function getTeamAchievements () {
+		return $this->teamAchievements;
 	}
 	
 	/**
-	 * Add achievement
+	 * Get team achievements array
 	 * 
-	 * @param AchievementModel $achievement
+	 * @return array
 	 */
-	public function addAchievement (AchievementModel $achievement = NULL) {
-		// Synchronously updating inverse side
-		$achievement->addTeam($this);
+	public function getTeamAchievementsArray () {
+		// Create new team achievement array
+		$teamAchievementArray = array();
 		
-		// Add achievement to the ArrayCollection
-		$this->achievements[] = $achievement;
+		// Loop through each team achievement in the ArrayCollection
+		foreach ($this->teamAchievements as $teamAchievement) {
+			// Add each team achievement to new team achievement array
+			array_push($teamAchievementArray, $teamAchievement->toArray());
+		}
+		
+		// Return new team achievement array
+		return $teamAchievementArray;
 	}
 	
 }

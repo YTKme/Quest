@@ -118,6 +118,27 @@ api.team.remove:
   defaults: { _controller: 'TeamController::remove' }
   methods: [DELETE]
 
+# Team Achievement
+api.teamachievement.add:
+  path: /teamachievement/add
+  defaults: { _controller: 'TeamAchievementController::add' }
+  methods: [POST]
+
+api.teamachievement.retrieve:
+  path: /teamachievement/retrieve
+  defaults: { _controller: 'TeamAchievementController::retrieve' }
+  methods: [GET]
+
+api.teamachievement.edit:
+  path: /teamachievement/edit
+  defaults: { _controller: 'TeamAchievementController::edit' }
+  methods: [PUT]
+
+api.teamachievement.remove:
+  path: /teamachievement/remove
+  defaults: { _controller: 'TeamAchievementController::remove' }
+  methods: [DELETE]
+
 api:
   path: /
   defaults: { _controller: 'QuestController::main' }

@@ -26,9 +26,9 @@ class AchievementModel {
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="picture")
+	 * @Column(name="icon")
 	 */
-	protected $picture = NULL;
+	protected $icon = NULL;
 	
 	/**
 	 * @Column(name="latitude")
@@ -52,9 +52,9 @@ class AchievementModel {
 	protected $game = NULL;
 	
 	/**
-	 * @ManyToMany(targetEntity="TeamModel", mappedBy="achievements")
+	 * @OneToMany(targetEntity="TeamAchievementModel", mappedBy="achievement")
 	 */
-	protected $teams = NULL;
+	protected $teamAchievements = NULL;
 	
 	/**
 	 * Constructor
@@ -71,7 +71,7 @@ class AchievementModel {
 		$id = NULL,
 		$name = NULL,
 		$description = NULL,
-		$picture = NULL,
+		$icon = NULL,
 		$latitude = NULL,
 		$longitude = NULL,
 		$point = NULL
@@ -79,7 +79,7 @@ class AchievementModel {
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
-		$this->picture = $picture;
+		$this->icon = $icon;
 		$this->latitude = $latitude;
 		$this->longitude = $longitude;
 		$this->point = $point;
@@ -95,7 +95,7 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
-			'picture' => $this->getPicture(),
+			'icon' => $this->getIcon(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint(),
@@ -115,7 +115,7 @@ class AchievementModel {
 			'id' => $this->getId(),
 			'name' => $this->getName(),
 			'description' => $this->getDescription(),
-			'picture' => $this->getPicture(),
+			'icon' => $this->getIcon(),
 			'latitude' => $this->getLatitude(),
 			'longitude' => $this->getLongitude(),
 			'point' => $this->getPoint()
@@ -168,21 +168,21 @@ class AchievementModel {
 	}
 	
 	/**
-	 * Get picture
+	 * Get icon
 	 * 
 	 * @return string
 	 */
-	public function getPicture () {
-		return $this->picture;
+	public function getIcon () {
+		return $this->icon;
 	}
 	
 	/**
-	 * Set picture
+	 * Set icon
 	 * 
-	 * @param string $picture
+	 * @param string $icon
 	 */
-	public function setPicture ($picture = NULL) {
-		$this->picture = $picture;
+	public function setIcon ($icon = NULL) {
+		$this->icon = $icon;
 	}
 	
 	/**
@@ -251,9 +251,9 @@ class AchievementModel {
 	/**
 	 * Set game
 	 * 
-	 * @param string $game
+	 * @param GameModel $game
 	 */
-	public function setGame ($game = NULL) {
+	public function setGame (GameModel $game = NULL) {
 		// Check if the new game is NULL
 		if ($game === NULL) {
 			// Check if the game for this achievement is NULL
@@ -279,31 +279,31 @@ class AchievementModel {
 	}
 	
 	/**
-	 * Get teams
+	 * Get team achievements
 	 * 
-	 * @return array
+	 * @return ArrayCollection
 	 */
-	public function getTeams () {
-		// Create new team array
-		$teamArray = array();
-	
-		// Loop through each team in the ArrayCollection
-		foreach ($this->teams as $team) {
-			// Add each team to new team array
-			array_push($teamArray, $team->toArray());
-		}
-	
-		// Return new team array
-		return $teamArray;
+	public function getTeamAchievements () {
+		return $this->teamAchievements;
 	}
 	
 	/**
-	 * Add team
-	 * 
-	 * @param TeamModel $team
+	 * Get team achievements array
+	 *
+	 * @return array
 	 */
-	public function addTeam (TeamModel $team = NULL) {
-		$this->teams[] = $team;
+	public function getTeamAchievementsArray () {
+		// Create new team achievement array
+		$teamAchievementArray = array();
+	
+		// Loop through each team achievement in the ArrayCollection
+		foreach ($this->teamAchievements as $teamAchievement) {
+			// Add each team achievement to new team achievement array
+			array_push($teamAchievementArray, $teamAchievement->toArray());
+		}
+	
+		// Return new team achievement array
+		return $teamAchievementArray;
 	}
 	
 }
