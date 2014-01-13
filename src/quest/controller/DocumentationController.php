@@ -27,7 +27,7 @@ class DocumentationController {
 		
 		// Validate user login
 		if (empty($application['session']->get('_USERNAME'))) {
-			//return new RedirectResponse($host);
+			return new RedirectResponse($host);
 		}
 		
 		return $application['twig']->render('doc/documentation.html.twig', array(
