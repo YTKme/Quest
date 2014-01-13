@@ -17,7 +17,6 @@
 		<script type="text/javascript" src="{{ RESOURCE }}/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/js/less-1.6.0.min.js"></script>
-		<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
 		{% block jshead %}{% endblock %}
 		
 		{% block mischead %}{% endblock %}
@@ -44,11 +43,14 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="{{ HOST }}/">Home</a></li>
 						</ul>
-						{% if _USERNAME %}
 						<ul class="nav navbar-nav navbar-right">
+							<li><a href="{{ HOST }}/documentation">Documentation</a></li>
+							
+							{% if _USERNAME %}
 							<li><a href="{{ HOST }}/logout">Logout</a></li>
+							{% endif %}
+							
 						</ul>
-						{% endif %}
 					</div>
 				</div>
 			</nav>

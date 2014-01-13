@@ -34,6 +34,11 @@ achievement:
   path: /achievement
   defaults: { _controller: 'AchievementController::main' }
 
+# Documentation
+documentation:
+  path: /documentation
+  defaults: { _controller: 'DocumentationController::main' }
+
 # Home
 home:
   path: /home
