@@ -72,6 +72,19 @@ class TeamModel {
 	}
 	
 	/**
+	 * To team achievement array
+	 * 
+	 * @return array
+	 */
+	public function toTeamAchievementArray () {
+		return array(
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'point' => $this->getPoint()
+		);
+	}
+	
+	/**
 	 * Get ID
 	 * 
 	 * @return string

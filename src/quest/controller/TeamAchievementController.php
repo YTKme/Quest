@@ -55,7 +55,6 @@ class TeamAchievementController implements ControllerInterface {
 						if (!empty($teamAchievement['team']) && !empty($teamAchievement['achievement']) &&
 							($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('id' => $teamAchievement['team']))) &&
 							($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $teamAchievement['achievement'])))) {
-							
 							$teamAchievementModel->setTeam($teamModel);
 							$teamAchievementModel->setAchievement($achievementModel);
 						}
@@ -97,7 +96,34 @@ class TeamAchievementController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function retrieve (Request $request, Application $application) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the team achievement exist
+				if ($teamAchievementModels = $application['quest.orm.manager']->getRepository('TeamAchievementModel')->findAll()) {
+					// Convert team achievement object to array
+					foreach ($teamAchievementModels as $key => $value) {
+						$teamAchievementModels[$key] = $teamAchievementModels[$key]->toArray();
+					}
+			
+					return $application->json($teamAchievementModels, 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve team achievement.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
+			return new Response('ERROR: Unable to retrieve team achievement.', 404);
+		}
 		
+		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
@@ -109,7 +135,64 @@ class TeamAchievementController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function edit (Request $request, Application $application) {
+		// JSON and PUT
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
+			// Get JSON data
+			if (!$jsonData = json_decode($request->getContent(), true)) {
+				return new Response('ERROR: Bad request.', 400);
+			}
 		
+			// Parse JSON data
+			$request->request->replace(is_array($jsonData) ? $jsonData : array());
+			
+			try {
+				// Create an array to store the team achievement updated
+				$teamAchievementArray = array();
+					
+				foreach ($jsonData as $teamAchievement) {
+					// Check if the team achievement exist
+					if ($teamAchievementModel = $application['quest.orm.manager']->getRepository('TeamAchievementModel')->findOneBy(array('id' => $teamAchievement['id']))) {
+						// Update team achievement
+						$teamAchievementModel->setPicture(
+							empty($teamAchievement['picture'])
+								? $teamAchievementModel->getPicture()
+								: $teamAchievement['picture']
+						);
+						
+						// Check if the team exist
+						if (!empty($teamAchievement['team']) && !empty($teamAchievement['achievement']) &&
+							($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('id' => $teamAchievement['team']))) &&
+							($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $teamAchievement['achievement'])))) {
+							$teamAchievementModel->setTeam($teamModel);
+							$teamAchievementModel->setAchievement($achievementModel);
+						}
+							
+						// Update team achievement
+						$application['quest.orm.manager']->persist($teamAchievementModel);
+							
+						// Push updated team achievement into the array
+						array_push($teamAchievementArray, $teamAchievementModel->toArray());
+					}
+				}
+				
+				// Synchronize with database
+				$application['quest.orm.manager']->flush();
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to edit team achievement.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+				
+			return $application->json($teamAchievementArray, 200);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
@@ -121,7 +204,49 @@ class TeamAchievementController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function remove (Request $request, Application $application) {
+		// JSON and DELETE
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), 'DELETE') === 0) {
+			// Get JSON data
+			if (!$jsonData = json_decode($request->getContent(), true)) {
+				return new Response('ERROR: Bad request.', 400);
+			}
 		
+			// Parse JSON data
+			$request->request->replace(is_array($jsonData) ? $jsonData : array());
+			
+			try {
+				// Create an array to store the team deleted
+				$teamAchievementArray = array();
+					
+				foreach ($jsonData as $teamAchievement) {
+					// Check if the team achievement exist
+					if ($teamAchievementModel = $application['quest.orm.manager']->getRepository('TeamAchievementModel')->findOneBy(array('id' => $teamAchievement['id']))) {
+						// Delete team achievement
+						$application['quest.orm.manager']->remove($teamAchievementModel);
+							
+						// Push deleted team achievement into the array
+						array_push($teamAchievementArray, $teamAchievementModel->toArray());
+					}
+				}
+					
+				// Synchronize with database
+				$application['quest.orm.manager']->flush();
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to delete team achievement.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+				
+			return $application->json($teamAchievementArray, 200);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
 	}
 	
 }

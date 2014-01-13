@@ -196,7 +196,7 @@ class TeamController implements ControllerInterface {
 						array_push($teamArray, $teamModel->toArray());
 					}
 				}
-			
+				
 				// Synchronize with database
 				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {

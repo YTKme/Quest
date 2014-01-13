@@ -60,6 +60,8 @@ class TeamAchievementModel {
 	public function toArray () {
 		return array(
 			'id' => $this->getId(),
+			'team' => $this->getTeam()->toTeamAchievementArray(),
+			'achievement' => $this->getAchievement()->toGameArray(),
 			'picture' => $this->getPicture()
 		);
 	}
@@ -80,6 +82,15 @@ class TeamAchievementModel {
 	 */
 	public function getTeam () {
 		return $this->team;
+	}
+	
+	/**
+	 * Get team array
+	 * 
+	 * @return array
+	 */
+	public function getTeamArray () {
+		return $this->team->toArray();
 	}
 	
 	/**
@@ -127,7 +138,28 @@ class TeamAchievementModel {
 	 * @param AchievementModel $achievement
 	 */
 	public function setAchievement (AchievementModel $achievement = NULL) {
-		$this->achievement = $achievement;
+		// Check if the achievement is NULL
+		if ($achievement === NULL) {
+			// Check if the achievement for this team achievement is NULL
+			if ($this->achievement !== NULL) {
+				// Remove this team achievement from the team
+				$this->achievement->getTeamAchievements()->removeElement($this);
+			}
+			
+			// Set the achievement for this team achievement to NULL
+			$this->achievement = NULL;
+		} else {
+			// Check if the achievement for this team achievement is NULL
+			if ($this->achievement !== NULL) {
+				// Remove this team achievement from the achievement
+				$this->achievement->getTeamAchievements()->removeElement($this);
+			}
+			
+			// Set the achievement for this team achievement
+			$this->achievement = $achievement;
+			// Add the team achievement to the collection for the achievement
+			$achievement->getTeamAchievements()->add($this);
+		}
 	}
 	
 	/**
