@@ -22,12 +22,12 @@ class GameModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="description")
+	 * @Column(name="description", nullable=true)
 	 */
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="location")
+	 * @Column(name="location", nullable=true)
 	 */
 	protected $location = NULL;
 	

@@ -32,17 +32,17 @@ class UserModel {
 	protected $role = NULL;
 	
 	/**
-	 * @Column(name="first_name")
+	 * @Column(name="first_name", nullable=true)
 	 */
 	protected $firstName = NULL;
 	
 	/**
-	 * @Column(name="last_name")
+	 * @Column(name="last_name", nullable=true)
 	 */
 	protected $lastName = NULL;
 	
 	/**
-	 * @Column(name="last_login")
+	 * @Column(name="last_login", nullable=true)
 	 */
 	protected $lastLogin = NULL;
 	

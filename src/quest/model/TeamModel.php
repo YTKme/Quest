@@ -22,7 +22,7 @@ class TeamModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="point", type="integer")
+	 * @Column(name="point", type="integer", nullable=true)
 	 */
 	protected $point = NULL;
 	

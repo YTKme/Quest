@@ -27,17 +27,17 @@ class EventModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="description")
+	 * @Column(name="description", nullable=true)
 	 */
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="start", type="datetimetz")
+	 * @Column(name="start", type="datetimetz", nullable=true)
 	 */
 	protected $start = NULL;
 	
 	/**
-	 * @Column(name="length", type="time")
+	 * @Column(name="length", type="time", nullable=true)
 	 */
 	protected $length = NULL;
 	

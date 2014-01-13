@@ -21,27 +21,27 @@ class AchievementModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="description")
+	 * @Column(name="description", nullable=true)
 	 */
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="icon")
+	 * @Column(name="icon", nullable=true)
 	 */
 	protected $icon = NULL;
 	
 	/**
-	 * @Column(name="latitude")
+	 * @Column(name="latitude", nullable=true)
 	 */
 	protected $latitude = NULL;
 	
 	/**
-	 * @Column(name="longitude")
+	 * @Column(name="longitude", nullable=true)
 	 */
 	protected $longitude = NULL;
 	
 	/**
-	 * @Column(name="point", type="integer")
+	 * @Column(name="point", type="integer", nullable=true)
 	 */
 	protected $point = NULL;
 	
