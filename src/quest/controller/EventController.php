@@ -105,13 +105,13 @@ class EventController implements ControllerInterface {
 						// Store event
 						$application['quest.orm.manager']->persist($eventModel);
 					}
-						
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read event into the array
 					array_push($eventArray, $eventModel->toArray());
 				}
-			
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']

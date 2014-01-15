@@ -89,13 +89,13 @@ class GameController implements ControllerInterface {
 						// Store game
 						$application['quest.orm.manager']->persist($gameModel);
 					}
-						
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read game into the array
 					array_push($gameArray, $gameModel->toArray());
 				}
-			
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']

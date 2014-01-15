@@ -86,13 +86,13 @@ class TeamController implements ControllerInterface {
 						// Store team
 						$application['quest.orm.manager']->persist($teamModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read team into the array
 					array_push($teamArray, $teamModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']

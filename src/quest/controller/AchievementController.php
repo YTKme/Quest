@@ -103,13 +103,13 @@ class AchievementController implements ControllerInterface {
 						// Store achievement
 						$application['quest.orm.manager']->persist($achievementModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read achievement into the array
 					array_push($achievementArray, $achievementModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
