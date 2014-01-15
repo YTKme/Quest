@@ -9,6 +9,11 @@ api.user.retrieve:
   defaults: { _controller: 'UserController::retrieve' }
   methods: [GET]
 
+api.user.retrieve.id:
+  path: /user/retrieve/id/{id}
+  defaults: { _controller: 'UserController::retrieveById' }
+  methods: [GET]
+
 api.user.edit:
   path: /user/edit
   defaults: { _controller: 'UserController::edit' }
