@@ -5,5 +5,12 @@
 		"role": "ADMINISTRATOR",
 		"firstName": "Yan",
 		"lastName": "Kuang"
+	},
+	{
+		"username": "albcheun",
+		"password": "albcheun",
+		"role": "ADMINISTRATOR",
+		"firstName": "Alben",
+		"lastName": "Cheung"
 	}
 ]

@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class AchievementController implements ControllerInterface {
@@ -26,7 +27,7 @@ class AchievementController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 	
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
+		if (empty($sessionUsername)) {
 			//return new RedirectResponse($host);
 		}
 	
@@ -103,13 +104,13 @@ class AchievementController implements ControllerInterface {
 						// Store achievement
 						$application['quest.orm.manager']->persist($achievementModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read achievement into the array
 					array_push($achievementArray, $achievementModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']

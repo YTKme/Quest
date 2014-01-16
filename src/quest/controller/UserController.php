@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class UserController implements ControllerInterface {
@@ -26,8 +27,8 @@ class UserController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 		
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
-			//return new RedirectResponse($host);
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
 		}
 		
 		return $application['twig']->render('user.html.twig', array(
@@ -84,13 +85,13 @@ class UserController implements ControllerInterface {
 						// Store user
 						$application['quest.orm.manager']->persist($userModel);
 					}
-						
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read user into the array
 					array_push($userArray, $userModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
@@ -149,6 +150,40 @@ class UserController implements ControllerInterface {
 	}
 	
 	/**
+	 * Retrieve user by ID
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
+	public function retrieveById (Request $request, Application $application, $id) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the user exist
+				if ($userModel = $application['quest.orm.manager']->getRepository('UserModel')->findOneBy(array('id' => $id))) {
+					return $application->json($userModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve user by ID.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+				
+			return new Response('ERROR: Unable to retrieve user by ID.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
 	 * Edit user
 	 *
 	 * @method PUT
@@ -175,11 +210,11 @@ class UserController implements ControllerInterface {
 					// Check if the user exist
 					if ($userModel = $application['quest.orm.manager']->getRepository('UserModel')->findOneBy(array('id' => $user['id']))) {
 						// Update user
-						$userModel->setUsername(
-							empty($user['username'])
-								? $userModel->getUsername()
-								: $user['username']
-						);
+// 						$userModel->setUsername(
+// 							empty($user['username'])
+// 								? $userModel->getUsername()
+// 								: $user['username']
+// 						);
 						$userModel->setPassword(
 							empty($user['password'])
 								? $userModel->getPassword()

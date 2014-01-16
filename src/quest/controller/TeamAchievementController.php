@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class TeamAchievementController implements ControllerInterface {
@@ -62,13 +63,13 @@ class TeamAchievementController implements ControllerInterface {
 						// Store team achievement
 						$application['quest.orm.manager']->persist($teamAchievementModel);
 					}
-						
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read team achievement into the array
 					array_push($teamAchievementArray, $teamAchievementModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']

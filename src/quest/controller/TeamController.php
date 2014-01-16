@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class TeamController implements ControllerInterface {
@@ -26,8 +27,8 @@ class TeamController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 	
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
-			//return new RedirectResponse($host);
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
 		}
 	
 		return $application['twig']->render('team.html.twig', array(
@@ -86,13 +87,13 @@ class TeamController implements ControllerInterface {
 						// Store team
 						$application['quest.orm.manager']->persist($teamModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read team into the array
 					array_push($teamArray, $teamModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
@@ -145,6 +146,40 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 		
+			return new Response('ERROR: Unable to retrieve team.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
+	 * Retrieve team by name
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
+	public function retrieveByName (Request $request, Application $application, $name) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the team exist
+				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
+					return $application->json($teamModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve team.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
 			return new Response('ERROR: Unable to retrieve team.', 404);
 		}
 		
