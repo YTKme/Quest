@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class QuestController {
 
@@ -21,6 +22,14 @@ class QuestController {
 	 * @return mixed
 	 */
 	public function main (Request $request, Application $application) {
+		$host = $request->getSchemeAndHttpHost();
+		$sessionUsername = $application['session']->get('_USERNAME');
+		
+		// Validate user login
+		if (!empty($sessionUsername)) {
+			return new RedirectResponse($host . '/main');
+		}
+		
 		return $application['twig']->render('index.html.twig');
 	}
 	

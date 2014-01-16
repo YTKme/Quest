@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class EventController implements ControllerInterface {
@@ -26,8 +27,8 @@ class EventController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 	
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
-			//return new RedirectResponse($host);
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
 		}
 	
 		return $application['twig']->render('event.html.twig', array(
