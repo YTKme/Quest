@@ -153,6 +153,40 @@ class TeamController implements ControllerInterface {
 	}
 	
 	/**
+	 * Retrieve team by name
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @return Response
+	 */
+	public function retrieveByName (Request $request, Application $application, $name) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the team exist
+				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
+					return $application->json($teamModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve team.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
+			return new Response('ERROR: Unable to retrieve team.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
 	 * Edit team
 	 *
 	 * @method PUT
