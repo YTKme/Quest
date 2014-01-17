@@ -15,6 +15,17 @@
  ###################}
 {% block jshead %}{% endblock %}
 
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/datatables.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
+<script type="text/javascript" src="{{ RESOURCE }}/js/achievement.js"></script>
+{% endblock %}
+
 {########
  # Body #
  ########}
@@ -25,7 +36,48 @@
 </header>
 
 <aside>
+	<p><button id="btnAddAchievement" class="btn btn-success" type="button">Add Achievement</button></p>
+	<table id="dTable" class="table tblAchievement">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Icon</th>
+				<th>Point</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </aside>
+
+<div id="dlgAchievementInformation">
+	<form id="frmAchievementInformation" role="form" enctype="multipart/form-data">
+		<div id="msgState"></div>
+		<div class="form-group">
+			<label for="txtName">Name</label>
+			<input id="txtName" class="form-control" type="text" placeholder="Name" />
+		</div>
+		<div class="form-group">
+			<label for="txtDescription">Description</label>
+			<textarea id="txtDescription" class="form-control" rows="3" placeholder="Description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="txtName">Icon</label>
+			<input id="binIcon" type="file">
+		</div>
+		<div class="form-group">
+			<label for="txtPoint">Point</label>
+			<input id="txtPoint" class="form-control" type="number" placeholder="0" />
+		</div>
+		<div class="form-group">
+			<label for="ddGame">Game</label>
+			<select id="ddGame" name="ddGame" class="form-control">
+				<option value="">Select Game</option>
+			</select>
+		</div>
+	</form>
+</div>
 		
 {% endblock %}
 

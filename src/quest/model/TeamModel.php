@@ -64,10 +64,10 @@ class TeamModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'point' => $this->getPoint(),
-			'teamAchievements' => $this->getTeamAchievementsArray()
+			'teamId' => $this->getId(),
+			'teamName' => $this->getName(),
+			'teamPoint' => $this->getPoint(),
+			'teamTeamAchievements' => $this->getTeamAchievementsArray()
 		);
 	}
 	
@@ -78,9 +78,9 @@ class TeamModel {
 	 */
 	public function toTeamAchievementArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'point' => $this->getPoint()
+			'teamId' => $this->getId(),
+			'teamName' => $this->getName(),
+			'teamPoint' => $this->getPoint()
 		);
 	}
 	

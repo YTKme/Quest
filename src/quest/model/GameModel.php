@@ -71,11 +71,11 @@ class GameModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'location' => $this->getLocation(),
-			'achievements' => $this->getAchievementsArray()
+			'gameId' => $this->getId(),
+			'gameName' => $this->getName(),
+			'gameDescription' => $this->getDescription(),
+			'gameLocation' => $this->getLocation(),
+			'gameAchievements' => $this->getAchievementsArray()
 		);
 	}
 	
@@ -86,10 +86,10 @@ class GameModel {
 	 */
 	public function toAchievementArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'location' => $this->getLocation()
+			'gameId' => $this->getId(),
+			'gameName' => $this->getName(),
+			'gameDescription' => $this->getDescription(),
+			'gameLocation' => $this->getLocation()
 		);
 	}
 	

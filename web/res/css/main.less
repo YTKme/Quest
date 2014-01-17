@@ -16,13 +16,17 @@ body {
 	display: none;
 }
 
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .textCenter {
 	text-align: center;
 }
 
 .frmLoginHeader {
-	margin-left: auto;
-	margin-right: auto;
+	.center;
 	width: 350px;
 }
 
@@ -34,6 +38,26 @@ body {
 .tblUser {
 	th {
 		width: 20%;
+	}
+}
+
+.tblTeam {	
+	th {
+		width: 25%;
+	}
+}
+
+.tblAchievement {	
+	th {
+		width: 25%;
+	}
+	
+	td:nth-child(2) {
+		.textCenter;
+	}
+	
+	.icoAchievement {
+		max-height: 64px;
 	}
 }
 

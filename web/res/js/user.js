@@ -139,16 +139,16 @@ $(function () {
 			$.each(data, function (index, user) {
 				// Add user to datatable
 				dTable.dataTable().fnAddData([
-					user.username,
-					user.firstName,
-					user.lastName,
-					user.role,
-					'<button id="btnEditUser-' + user.id + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.id + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
+					user.userUsername,
+					user.userFirstName,
+					user.userLastName,
+					user.userRole,
+					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
 				]);
 				
 				// Set edit user button
-				setEditUserButton(user.id);
-				setRemoveUserButton(user.id);
+				setEditUserButton(user.userId);
+				setRemoveUserButton(user.userId);
 			});
 		})
 		.error(function () {

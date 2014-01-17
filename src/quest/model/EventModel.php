@@ -96,13 +96,13 @@ class EventModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'code' => $this->getCode(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'start' => $this->getStart(),
-			'length' => $this->getLength(),
-			'game' => empty($this->getGame())
+			'eventId' => $this->getId(),
+			'eventCode' => $this->getCode(),
+			'eventName' => $this->getName(),
+			'eventDescription' => $this->getDescription(),
+			'eventStart' => $this->getStart(),
+			'eventLength' => $this->getLength(),
+			'eventGame' => empty($this->getGame())
 				? NULL
 				: $this->getGame()->toArray()
 		);
