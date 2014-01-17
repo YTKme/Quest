@@ -92,14 +92,14 @@ class AchievementModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'icon' => $this->getIcon(),
-			'latitude' => $this->getLatitude(),
-			'longitude' => $this->getLongitude(),
-			'point' => $this->getPoint(),
-			'game' => empty($this->getGame())
+			'achievementId' => $this->getId(),
+			'achievementName' => $this->getName(),
+			'achievementDescription' => $this->getDescription(),
+			'achievementIcon' => $this->getIcon(),
+			'achievementLatitude' => $this->getLatitude(),
+			'achievementLongitude' => $this->getLongitude(),
+			'achievementPoint' => $this->getPoint(),
+			'achievementGame' => empty($this->getGame())
 				? NULL
 				: $this->getGame()->toAchievementArray()
 		);
@@ -112,13 +112,13 @@ class AchievementModel {
 	 */
 	public function toGameArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'icon' => $this->getIcon(),
-			'latitude' => $this->getLatitude(),
-			'longitude' => $this->getLongitude(),
-			'point' => $this->getPoint()
+			'achievementId' => $this->getId(),
+			'achievementName' => $this->getName(),
+			'achievementDescription' => $this->getDescription(),
+			'achievementIcon' => $this->getIcon(),
+			'achievementLatitude' => $this->getLatitude(),
+			'achievementLongitude' => $this->getLongitude(),
+			'achievementPoint' => $this->getPoint()
 		);
 	}
 	

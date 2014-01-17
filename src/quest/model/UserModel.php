@@ -85,12 +85,12 @@ class UserModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'username' => $this->getUsername(),
-			'role' => $this->getRole(),
-			'firstName' => $this->getFirstName(),
-			'lastName' => $this->getLastName(),
-			'lastLogin' => $this->getLastLogin()
+			'userId' => $this->getId(),
+			'userUsername' => $this->getUsername(),
+			'userRole' => $this->getRole(),
+			'userFirstName' => $this->getFirstName(),
+			'userLastName' => $this->getLastName(),
+			'userLastLogin' => $this->getLastLogin()
 		);
 	}
 	

@@ -35,10 +35,10 @@ $(function () {
 			$.each(data, function (index, achievement) {
 				// Add achievement to datatable
 				dTable.dataTable().fnAddData([
-					achievement.name,
-					(achievement.icon !== null) ? '<img class="center icoAchievement" src="' + achievement.icon + '" alt="Icon" title="Icon" />' : '<img class="center icoAchievement" src="' + _HOST + '/web/res/img/trophy.png" alt="Icon" title="Icon" />',
-					achievement.point,
-					'<button id="btnEditAchievement-' + achievement.id + '" class="btn btn-primary btnEditAchievement" type="button">Edit</button> <button id="btnRemoveTeam-' + achievement.id + '" class="btn btn-danger btnRemoveAchievement" type="button">Remove</button>'
+					achievement.achievementName,
+					(achievement.achievementIcon !== null) ? '<img class="center icoAchievement" src="' + achievement.achievementIcon + '" alt="Icon" title="Icon" />' : '<img class="center icoAchievement" src="' + _HOST + '/web/res/img/trophy.png" alt="Icon" title="Icon" />',
+					achievement.achievementPoint,
+					'<button id="btnEditAchievement-' + achievement.achievementId + '" class="btn btn-primary btnEditAchievement" type="button">Edit</button> <button id="btnRemoveTeam-' + achievement.achievementId + '" class="btn btn-danger btnRemoveAchievement" type="button">Remove</button>'
 				]);
 			});
 		})
@@ -61,7 +61,7 @@ $(function () {
 			// Loop through each result data
 			$.each(data, function (index, game) {
 				// Add game to select drop down
-				$('#ddGame').append('<option value="' + game.id + '">' + game.name + '</option>');
+				$('#ddGame').append('<option value="' + game.gameId + '">' + game.gameName + '</option>');
 			});
 		})
 		.error(function () {
