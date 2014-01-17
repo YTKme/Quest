@@ -20,6 +20,9 @@
  ######################}
 {% block mischead %}
 {% include 'inc/snippet.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/documentation.js"></script>
 {% endblock %}
 
 {########
@@ -33,12 +36,12 @@
 
 <aside class="col-lg-2 col-md-2">
 	<div class="list-group">
-		<a href="#" class="list-group-item">User</a>
-		<a href="#" class="list-group-item">Team</a>
-		<a href="#" class="list-group-item">Event</a>
-		<a href="#" class="list-group-item">Game</a>
-		<a href="#" class="list-group-item">Achievement</a>
-		<a href="#" class="list-group-item">Team Achievement</a>
+		<a id="lstNavigationUser" href="#" class="list-group-item">User</a>
+		<a id="lstNavigationTeam" href="#" class="list-group-item">Team</a>
+		<a id="lstNavigationEvent" href="#" class="list-group-item">Event</a>
+		<a id="lstNavigationGame" href="#" class="list-group-item">Game</a>
+		<a id="lstNavigationAchievement" href="#" class="list-group-item">Achievement</a>
+		<a id="lstNavigationTeamAchievement" href="#" class="list-group-item">Team Achievement</a>
 	</div>
 </aside>
 
@@ -49,7 +52,14 @@
 	= USER =
 	========
 	-->
-	<h3 name="user">User</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdUser">User</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add User</div>
 		<div class="panel-body">
@@ -129,7 +139,14 @@
 	= TEAM =
 	========
 	-->
-	<h3>Team</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdTeam">Team</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add Team</div>
 		<div class="panel-body">
@@ -227,7 +244,14 @@
 	= EVENT =
 	=========
 	-->
-	<h3>Event</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdEvent">Event</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add Event</div>
 		<div class="panel-body">
@@ -325,7 +349,14 @@
 	= GAME =
 	========
 	-->
-	<h3>Game</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdGame">Game</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add Game</div>
 		<div class="panel-body">
@@ -420,7 +451,14 @@
 	= ACHIEVEMENT =
 	===============
 	-->
-	<h3>Achievement</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdAchievement">Achievement</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add Achievement</div>
 		<div class="panel-body">
@@ -506,7 +544,14 @@
 	= TEAM ACHIEVEMENT =
 	====================
 	-->
-	<h3>Team Achievement</h3>
+	<header class="row">
+		<h3 class="col-lg-10" name="hdTeamAchievement">Team Achievement</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
 	<section class="panel panel-primary">
 		<div class="panel-heading">Add Team Achievement</div>
 		<div class="panel-body">
@@ -580,17 +625,4 @@
 {###################
  # JavaScript Tail #
  ###################}
-{% block jstail %}
-
-<script type="text/javascript">
-	$(function () {
-		$('.snippet').snippet(
-			'javascript',
-			{
-				style: 'emacs'
-			}
-		);
-	});
-</script>
-
-{% endblock %}
+{% block jstail %}{% endblock %}
