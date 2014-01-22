@@ -146,7 +146,7 @@ $(function () {
 					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
 				]);
 				
-				// Set edit user button
+				// Set edit and remove user button
 				setEditUserButton(user.userId);
 				setRemoveUserButton(user.userId);
 			});
@@ -172,15 +172,16 @@ $(function () {
 			$.each(data, function (index, user) {
 				// Add user to datatable
 				dTable.dataTable().fnAddData([
-					user.username,
-					user.firstName,
-					user.lastName,
-					user.role,
-					'<button id="btnEditUser-' + user.id + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.id + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
+					user.userUsername,
+					user.userFirstName,
+					user.userLastName,
+					user.userRole,
+					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
 				]);
 				
-				// Set edit user button
-				setEditUserButton(user.id);
+				// Set edit and remove user button
+				setEditUserButton(user.userId);
+				setRemoveUserButton(user.userId);
 			});
 			
 			fadeMessage('success', 'SUCCESS: User has been added.');
@@ -305,15 +306,10 @@ $(function () {
 			isValid = false;
 		}
 		
+		// Focus on first error
+		$(".has-error .form-control").first().focus();
+		
 		return isValid;
-	}
-	
-	/**
-	 * Fade message
-	 */
-	function fadeMessage (type, message) {
-		$('#msgAlert').html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + '<p>' + message + '</p>');
-		$('#msgAlert').addClass('alert alert-' + type + ' alert-dismissable');
 	}
 	
 	/**
@@ -330,10 +326,11 @@ $(function () {
 		$('#txtLastName').val('');
 	}
 	
-//	$('.btnRemoveUser').click(function () {
-//		var position = dTable.fnGetPosition($(this).parent()[0]);
-//		
-//		console.log($(this).parent()[0]);
-//		console.log(position);
-//	});
+	/**
+	 * Fade message
+	 */
+	function fadeMessage (type, message) {
+		$('#msgAlert').html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + '<p>' + message + '</p>');
+		$('#msgAlert').addClass('alert alert-' + type + ' alert-dismissable');
+	}
 });
