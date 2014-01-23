@@ -51,6 +51,8 @@ $(function () {
 	
 	/**
 	 * Edit achievement button
+	 * 
+	 * @param Integer achievementId
 	 */
 	function setEditAchievementButton (achievementId) {
 		$('#btnEditAchievement-' + achievementId).click(function () {
@@ -101,6 +103,8 @@ $(function () {
 	
 	/**
 	 * Remove achievement button
+	 * 
+	 * @param Integer achievementId
 	 */
 	function setRemoveAchievementButton (achievementId) {
 		$('#btnRemoveAchievement-' + achievementId).click(function () {
@@ -228,8 +232,10 @@ $(function () {
 	
 	/**
 	 * Edit achievement
+	 * 
+	 * @param Integer achievementId
 	 */
-	function editAchievement (id) {
+	function editAchievement (achievementId) {
 		// Get the achievement information
 		var name = $('#txtName').val();
 		var point = $('#txtPoint').val();
@@ -239,12 +245,12 @@ $(function () {
 			url: '/api/achievement/edit',
 			type: 'PUT',
 			contentType: 'application/json',
-			data: JSON.stringify(getAchievementArray(id))
+			data: JSON.stringify(getAchievementArray(achievementId))
 		})
 		.done(function () {
 			// Update table
-			$('#btnEditAchievement-' + id).parent().parent().find('> :nth-child(1)').html(name);
-			$('#btnEditAchievement-' + id).parent().parent().find('> :nth-child(3)').html(point);
+			$('#btnEditAchievement-' + achievementId).parent().parent().find('> :nth-child(1)').html(name);
+			$('#btnEditAchievement-' + achievementId).parent().parent().find('> :nth-child(3)').html(point);
 			
 			fadeMessage('success', 'SUCCESS: Achievement has been edited.');
 		})
@@ -255,18 +261,21 @@ $(function () {
 	
 	/**
 	 * Remove achievement
+	 * 
+	 * @param Integer achievementId
+	 * @param Integer achievementRow
 	 */
-	function removeAchievement (id, row) {
+	function removeAchievement (achievementId, achievementRow) {
 		// AJAX call
 		$.ajax({
 			url: '/api/achievement/remove',
 			type: 'DELETE',
 			contentType: 'application/json',
-			data: JSON.stringify([{"id": id}])
+			data: JSON.stringify([{"id": achievementId}])
 		})
 		.done(function () {
 			// Update table
-			dTable.dataTable().fnDeleteRow(row);
+			dTable.dataTable().fnDeleteRow(achievementRow);
 			
 			fadeMessage('success', 'SUCCESS: Achievement has been removed.');
 		})
@@ -278,14 +287,15 @@ $(function () {
 	/**
 	 * Get achievement array
 	 * 
+	 * @param Integer achievementId
 	 * @returns Array
 	 */
-	function getAchievementArray (id) {
+	function getAchievementArray (achievementId) {
 		// Create a new achievement array
 		var achievementArray = new Array();
 		
 		achievementArray.push({
-			'id': id,
+			'id': achievementId,
 			'name': $('#txtName').val(),
 			'description': $('#txtDescription').val(),
 			'point': $('#txtPoint').val(),
@@ -298,6 +308,7 @@ $(function () {
 	/**
 	 * Is valid achievement
 	 * 
+	 * @param String state
 	 * @returns Boolean
 	 */
 	function isValidAchievement (state) {

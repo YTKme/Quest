@@ -39,7 +39,6 @@ $(function () {
 					}
 				},
 				Cancel: function () {
-					resetUserInformation();
 					$(this).dialog('close');
 				}
 			},
@@ -51,6 +50,8 @@ $(function () {
 	
 	/**
 	 * Edit user button
+	 * 
+	 * @param Integer userId
 	 */
 	function setEditUserButton (userId) {
 		$('#btnEditUser-' + userId).click(function () {
@@ -79,7 +80,6 @@ $(function () {
 						}
 					},
 					Cancel: function () {
-						resetUserInformation();
 						$(this).dialog('close');
 					}
 				},
@@ -92,6 +92,8 @@ $(function () {
 	
 	/**
 	 * Remove user button
+	 * 
+	 * @param Integer userId
 	 */
 	function setRemoveUserButton (userId) {
 		$('#btnRemoveUser-' + userId).click(function () {
@@ -193,8 +195,10 @@ $(function () {
 	
 	/**
 	 * Edit user
+	 * 
+	 * @param Integer userId
 	 */
-	function editUser (id) {
+	function editUser (userId) {
 		// Get the user information
 		var role = $('#ddRole').val();
 		var firstName = $('#txtFirstName').val();
@@ -205,13 +209,13 @@ $(function () {
 			url: '/api/user/edit',
 			type: 'PUT',
 			contentType: 'application/json',
-			data: JSON.stringify(getUserArray(id))
+			data: JSON.stringify(getUserArray(userId))
 		})
 		.done(function () {
 			// Update table
-			$('#btnEditUser-' + id).parent().parent().find('> :nth-child(2)').html(firstName);
-			$('#btnEditUser-' + id).parent().parent().find('> :nth-child(3)').html(lastName);
-			$('#btnEditUser-' + id).parent().parent().find('> :nth-child(4)').html(role);
+			$('#btnEditUser-' + userId).parent().parent().find('> :nth-child(2)').html(firstName);
+			$('#btnEditUser-' + userId).parent().parent().find('> :nth-child(3)').html(lastName);
+			$('#btnEditUser-' + userId).parent().parent().find('> :nth-child(4)').html(role);
 			
 			fadeMessage('success', 'SUCCESS: User has been edited.');
 		})
@@ -222,18 +226,21 @@ $(function () {
 	
 	/**
 	 * Remove user
+	 * 
+	 * @param Integer userId
+	 * @param Integer userRow
 	 */
-	function removeUser (id, row) {
+	function removeUser (userId, userRow) {
 		// AJAX call
 		$.ajax({
 			url: '/api/user/remove',
 			type: 'DELETE',
 			contentType: 'application/json',
-			data: JSON.stringify([{"id": id}])
+			data: JSON.stringify([{"id": userId}])
 		})
 		.done(function () {
 			// Update table
-			dTable.dataTable().fnDeleteRow(row);
+			dTable.dataTable().fnDeleteRow(userRow);
 			
 			fadeMessage('success', 'SUCCESS: User has been removed.');
 		})
@@ -245,15 +252,16 @@ $(function () {
 	/**
 	 * Get user array
 	 * 
+	 * @param Integer userId
 	 * @returns Array
 	 */
-	function getUserArray (id) {
+	function getUserArray (userId) {
 		// Create a new user array
 		var userArray = new Array();
 		
 		// Push the user data into the new user array
 		userArray.push({
-			'id': id,
+			'id': userId,
 			'username': $('#txtUsername').val(),
 			'password': $('#txtPassword').val(),
 			'role': $('#ddRole').val(),
@@ -267,6 +275,7 @@ $(function () {
 	/**
 	 * Is valid user
 	 * 
+	 * @param String state
 	 * @returns Boolean
 	 */
 	function isValidUser (state) {
@@ -328,9 +337,17 @@ $(function () {
 	
 	/**
 	 * Fade message
+	 * 
+	 * @param String type
+	 * @param String message
 	 */
 	function fadeMessage (type, message) {
+		// Clear message
+		$('#msgAlert').html('');
+		$('#msgAlert').removeClass();
+		
 		$('#msgAlert').html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + '<p>' + message + '</p>');
 		$('#msgAlert').addClass('alert alert-' + type + ' alert-dismissable');
 	}
+	
 });
