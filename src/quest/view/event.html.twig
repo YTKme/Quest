@@ -3,7 +3,7 @@
 {#########
  # Title #
  #########}
-{% block title %}Main{% endblock %}
+{% block title %}Event{% endblock %}
 
 {##############################
  # Cascading Style Sheet Head #
@@ -15,6 +15,17 @@
  ###################}
 {% block jshead %}{% endblock %}
 
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/datatables.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
+<script type="text/javascript" src="{{ RESOURCE }}/js/event.js"></script>
+{% endblock %}
+
 {########
  # Body #
  ########}
@@ -24,7 +35,22 @@
 	<h2>Event</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
+	<p><button id="btnAddEvent" class="btn btn-success" type="button">Add</button></p>
+	<table id="dTable" class="table tblGame">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Location</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </aside>
 		
 {% endblock %}

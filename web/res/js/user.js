@@ -145,7 +145,7 @@ $(function () {
 					user.userFirstName,
 					user.userLastName,
 					user.userRole,
-					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
+					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove</button>'
 				]);
 				
 				// Set edit and remove user button
@@ -178,7 +178,7 @@ $(function () {
 					user.userFirstName,
 					user.userLastName,
 					user.userRole,
-					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit User</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>'
+					'<button id="btnEditUser-' + user.userId + '" class="btn btn-primary btnEditUser" type="button">Edit</button> <button id="btnRemoveUser-' + user.userId + '" class="btn btn-danger btnRemoveUser" type="button">Remove</button>'
 				]);
 				
 				// Set edit and remove user button
