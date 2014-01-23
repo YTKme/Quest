@@ -3,7 +3,7 @@
 {#########
  # Title #
  #########}
-{% block title %}Main{% endblock %}
+{% block title %}Game{% endblock %}
 
 {##############################
  # Cascading Style Sheet Head #
@@ -15,6 +15,17 @@
  ###################}
 {% block jshead %}{% endblock %}
 
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/datatables.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
+<script type="text/javascript" src="{{ RESOURCE }}/js/game.js"></script>
+{% endblock %}
+
 {########
  # Body #
  ########}
@@ -24,9 +35,51 @@
 	<h2>Game</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
+	<p><button id="btnAddGame" class="btn btn-success" type="button">Add Game</button></p>
+	<table id="dTable" class="table tblGame">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Location</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </aside>
-		
+
+<div id="dlgGameInformation" class="hide">
+	<form id="frmGameInformation" role="form">
+		<div id="msgState"></div>
+		<div class="form-group">
+			<label for="txtName">Name</label>
+			<input id="txtName" class="form-control" name="txtName" type="text" placeholder="Name" />
+		</div>
+		<div class="form-group">
+			<label for="txtDescription">Description</label>
+			<textarea id="txtDescription" class="form-control" name="txtDescription" rows="3" placeholder="Description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="ddLocation">Location</label>
+			<select id="ddLocation" class="form-control" name="ddLocation">
+				<option value="">Select Location</option>
+				<optgroup label="AMER">
+					<option value="SJC">SJC</option>
+					<option value="RTP">RTP</option>
+				</optgroup>
+			</select>
+		</div>
+	</form>
+</div>
+
+<div id="dlgRemoveGame" class="hide">
+</div>
+
 {% endblock %}
 
 {###################
