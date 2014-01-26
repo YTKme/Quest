@@ -61,6 +61,11 @@ api.event.retrieve:
   defaults: { _controller: 'EventController::retrieve' }
   methods: [GET]
 
+api.event.retrieve.id:
+  path: /event/retrieve/id/{id}
+  defaults: { _controller: 'EventController::retrieveById' }
+  methods: [GET]
+
 api.event.retrieve.code:
   path: /event/retrieve/code/{code}
   defaults: { _controller: 'EventController::retrieveByCode' }

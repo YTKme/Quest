@@ -11,10 +11,10 @@ $(function () {
 	 * Main
 	 */
 	function init () {
-		// Retrieve achievement and add them to datatable
+		// Retrieve achievement(s) and add them to datatable
 		retrieveAchievement();
 		
-		// Retrieve game and add them to dialog select drop down
+		// Retrieve game(s) and add them to dialog select drop down
 		retrieveAchievementGame();
 	}
 	

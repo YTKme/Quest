@@ -11,7 +11,7 @@ $(function () {
 	 * Main
 	 */
 	function init () {
-		// Retrieve user and add them to datatable
+		// Retrieve user(s) and add them to datatable
 		retrieveUser();
 	}
 	

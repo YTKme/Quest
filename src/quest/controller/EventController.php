@@ -171,11 +171,47 @@ class EventController implements ControllerInterface {
 	}
 	
 	/**
+	 * Retrieve event by ID
+	 * 
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @param Integer $id
+	 * @return Response
+	 */
+	public function retrieveById (Request $request, Application $application, $id) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the event exist
+				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('id' => $id))) {
+					return $application->json($eventModel->toArray(), 200);
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve event by code.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+				
+			return new Response('ERROR: Unable to retrieve event by id.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
 	 * Retrieve event by code
 	 *
 	 * @method GET
 	 * @param Request $request
 	 * @param Application $application
+	 * @param String $code
 	 * @return Response
 	 */
 	public function retrieveByCode (Request $request, Application $application, $code) {
@@ -258,8 +294,11 @@ class EventController implements ControllerInterface {
 						);
 						
 						// Check if the game exist
-						if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
-							$eventModel->setGame($gameModel);
+						if (!empty($event['game'])) {
+							// Check if the game exist
+							if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $event['game']))) {
+								$eventModel->setGame($gameModel);
+							}
 						}
 	
 						// Update event
@@ -315,7 +354,7 @@ class EventController implements ControllerInterface {
 	
 				foreach ($jsonData as $event) {
 					// Check if the event exist
-					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $event['code']))) {
+					if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('id' => $event['id']))) {
 						// Delete event
 						$application['quest.orm.manager']->remove($eventModel);
 
