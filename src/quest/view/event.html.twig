@@ -3,7 +3,7 @@
 {#########
  # Title #
  #########}
-{% block title %}Main{% endblock %}
+{% block title %}Event{% endblock %}
 
 {##############################
  # Cascading Style Sheet Head #
@@ -15,6 +15,18 @@
  ###################}
 {% block jshead %}{% endblock %}
 
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/datatables.html.twig' %}
+{% include 'inc/datetimepicker.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
+<script type="text/javascript" src="{{ RESOURCE }}/js/event.js"></script>
+{% endblock %}
+
 {########
  # Body #
  ########}
@@ -24,8 +36,56 @@
 	<h2>Event</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
+	<p><button id="btnAddEvent" class="btn btn-success" type="button">Add</button></p>
+	<table id="dTable" class="table tblEvent">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Code</th>
+				<th>Start</th>
+				<th>Length</th>
+				<th>Remain</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </aside>
+
+<div id="dlgEventInformation" class="hide">
+	<form id="frmEventInformation" role="form">
+		<div id="msgState"></div>
+		<div class="form-group">
+			<label for="txtName">Name</label>
+			<input id="txtName" class="form-control" name="txtName" type="text" placeholder="Name" />
+		</div>
+		<div class="form-group">
+			<label for="txtDescription">Description</label>
+			<textarea id="txtDescription" class="form-control" name="txtDescription" rows="3" placeholder="Description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="txtStart">Start</label>
+			<input id="txtStart" class="form-control" name="txtStart" type="text" placeholder="Start" />
+		</div>
+		<div class="form-group">
+			<label for="txtLength">Length</label>
+			<input id="txtLength" class="form-control" name="txtLength" type="text" placeholder="Length" />
+		</div>
+		<div class="form-group">
+			<label for="ddGame">Game</label>
+			<select id="ddGame" class="form-control" name="ddGame">
+				<option value="">Select Game</option>
+			</select>
+		</div>
+	</form>
+</div>
+
+<div id="dlgRemoveEvent" class="hide">
+</div>
 		
 {% endblock %}
 

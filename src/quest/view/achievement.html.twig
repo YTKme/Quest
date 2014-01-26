@@ -3,7 +3,7 @@
 {#########
  # Title #
  #########}
-{% block title %}Main{% endblock %}
+{% block title %}Achievement{% endblock %}
 
 {##############################
  # Cascading Style Sheet Head #
@@ -35,8 +35,10 @@
 	<h2>Achievement</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
-	<p><button id="btnAddAchievement" class="btn btn-success" type="button">Add Achievement</button></p>
+	<p><button id="btnAddAchievement" class="btn btn-success" type="button">Add</button></p>
 	<table id="dTable" class="table tblAchievement">
 		<thead>
 			<tr>
@@ -56,27 +58,30 @@
 		<div id="msgState"></div>
 		<div class="form-group">
 			<label for="txtName">Name</label>
-			<input id="txtName" class="form-control" type="text" placeholder="Name" />
+			<input id="txtName" class="form-control" name="txtName" type="text" placeholder="Name" />
 		</div>
 		<div class="form-group">
 			<label for="txtDescription">Description</label>
-			<textarea id="txtDescription" class="form-control" rows="3" placeholder="Description"></textarea>
+			<textarea id="txtDescription" class="form-control" name="txtDescription" rows="3" placeholder="Description"></textarea>
 		</div>
 		<div class="form-group">
-			<label for="txtName">Icon</label>
-			<input id="binIcon" type="file">
+			<label for="binIcon">Icon</label>
+			<input id="binIcon" name="binIcon" type="file">
 		</div>
 		<div class="form-group">
 			<label for="txtPoint">Point</label>
-			<input id="txtPoint" class="form-control" type="number" placeholder="0" />
+			<input id="txtPoint" class="form-control" name="txtPoint" type="number" placeholder="0" />
 		</div>
 		<div class="form-group">
 			<label for="ddGame">Game</label>
-			<select id="ddGame" name="ddGame" class="form-control">
+			<select id="ddGame" class="form-control" name="ddGame">
 				<option value="">Select Game</option>
 			</select>
 		</div>
 	</form>
+</div>
+
+<div id="dlgRemoveAchievement" class="hide">
 </div>
 		
 {% endblock %}
