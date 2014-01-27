@@ -4,6 +4,7 @@
 
 $(function () {
 	
+	// Store interval ID
 	var eventCoundownId = new Array();
 	
 	// Initialize
@@ -20,7 +21,7 @@ $(function () {
 		retrieveEvent();
 		
 		// Retrieve game(s) and add them to dialog select drop down
-		retrieveEventGame();
+		retrieveGame();
 	}
 	
 	/**
@@ -81,7 +82,7 @@ $(function () {
 			// Set focus to name
 			$('#txtName').attr('autofocus', 'autofocus');
 			
-			// AJAX call to get game information from database
+			// AJAX call to get event information from database
 			$.ajax({
 				url: '/api/event/retrieve/id/' + eventId,
 				type: 'GET',
@@ -162,7 +163,7 @@ $(function () {
 	 * Retrieve event
 	 */
 	function retrieveEvent() {
-		// AJAX call to retrieve all events
+		// AJAX call to retrieve all event(s)
 		$.ajax({
 			url: '/api/event/retrieve',
 			type: 'GET',
@@ -195,10 +196,10 @@ $(function () {
 	}
 	
 	/**
-	 * Retrieve event game
+	 * Retrieve game
 	 */
-	function retrieveEventGame () {
-		// AJAX call
+	function retrieveGame () {
+		// AJAX call to retrieve all event game(s)
 		$.ajax({
 			url: '/api/game/retrieve',
 			type: 'GET',

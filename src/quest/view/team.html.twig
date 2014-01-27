@@ -35,6 +35,8 @@
 	<h2>Team</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
 	<p><button id="btnAddTeam" class="btn btn-success" type="button">Add</button></p>
 	<table id="dTable" class="table tblTeam">
@@ -50,6 +52,29 @@
 		</tbody>
 	</table>
 </aside>
+
+<div id="dlgTeamInformation" class="hide">
+	<form id="frmTeamInformation" role="form">
+		<div id="msgState"></div>
+		<div class="form-group">
+			<label for="txtName">Name</label>
+			<input id="txtName" class="form-control" name="txtName" type="text" placeholder="Name" />
+		</div>
+		<div class="form-group">
+			<label for="txtPoint">Point</label>
+			<input id="txtPoint" class="form-control" name="txtPoint" type="number" placeholder="0" />
+		</div>
+		<div class="form-group">
+			<label for="ddEvent">Event</label>
+			<select id="ddEvent" class="form-control" name="ddEvent">
+				<option value="">Select Event</option>
+			</select>
+		</div>
+	</form>
+</div>
+
+<div id="dlgRemoveTeam" class="hide">
+</div>
 		
 {% endblock %}
 
