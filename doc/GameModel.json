@@ -1,7 +1,7 @@
 [
 	{
-		"name": "Game I",
-		"description": "Game I",
+		"name": "SJC ITUP Game",
+		"description": "SJC ITUP Scavenger Hunt",
 		"location": "SJC",
 		"achievements": [
 			{"id": "1"},
@@ -9,9 +9,9 @@
 		]
 	},
 	{
-		"name": "Game II",
-		"description": "Game II",
-		"location": "SJC",
+		"name": "RTP ITUP Game",
+		"description": "RTP ITUP Scavenger Hunt",
+		"location": "RTP",
 		"achievements": [
 			{"id": "3"}
 		]

@@ -22,6 +22,10 @@ team:
   path: /team
   defaults: { _controller: 'TeamController::main' }
 
+team.status:
+  path: /team/status/{id}
+  defaults: { _controller: 'TeamController::status' }
+
 event:
   path: /event
   defaults: { _controller: 'EventController::main' }

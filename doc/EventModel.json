@@ -1,7 +1,7 @@
 [
 	{
-		"name": "Event I",
-		"description": "Event I",
+		"name": "SJC ITUP",
+		"description": "SJC ITUP Onboarding Orientation",
 		"start": "2014-01-23 12:00:00",
 		"length": "23:00:00",
 		"game": "3",
@@ -10,8 +10,8 @@
 		]
 	},
 	{
-		"name": "Event II",
-		"description": "Event II",
+		"name": "RTP ITUP",
+		"description": "RTP ITUP Onboarding Orientation",
 		"start": "2014-01-23 05:00:00",
 		"length": "23:00:00",
 		"game": "4",
