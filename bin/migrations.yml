@@ -1,0 +1,4 @@
+name: Quest Migration
+migrations_namespace: Quest\Migration
+table_name: doctrine_migration_versions
+migrations_directory: ../src/quest/migration
