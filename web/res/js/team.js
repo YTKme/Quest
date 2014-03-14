@@ -146,7 +146,7 @@ $(function () {
 					team.teamName,
 					team.teamPoint,
 					0,
-					'<button id="btnEditTeam-' + team.teamId + '" class="btn btn-primary btnEditTeam" type="button">Edit</button> <button id="btnRemoveTeam-' + team.teamId + '" class="btn btn-danger btnRemoveTeam" type="button">Remove</button>'
+					getButton(team.teamId)
 				]);
 				
 				// Set edit and remove team button
@@ -200,7 +200,7 @@ $(function () {
 					team.teamName,
 					team.teamPoint,
 					0,
-					'<button id="btnEditTeam-' + team.teamId + '" class="btn btn-primary btnEditTeam" type="button">Edit</button> <button id="btnRemoveTeam-' + team.teamId + '" class="btn btn-danger btnRemoveTeam" type="button">Remove</button>'
+					getButton(team.teamId)
 				]);
 				
 				// Set edit and remove team button
@@ -338,6 +338,18 @@ $(function () {
 		
 		$('#msgAlert').html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + '<p>' + message + '</p>');
 		$('#msgAlert').addClass('alert alert-' + type + ' alert-dismissable');
+	}
+	
+	/**
+	 * Get button
+	 * 
+	 * @param Integer
+	 * @returns String button
+	 */
+	function getButton (teamId) {
+		return '<a id="btnStatusTeam-' + teamId + '" class="btn btn-success btnStatusTeam" href="/team/status/' + teamId + '">Status</a> ' +
+			'<button id="btnEditTeam-' + teamId + '" class="btn btn-primary btnEditTeam" type="button">Edit</button> ' +
+			'<button id="btnRemoveTeam-' + teamId + '" class="btn btn-danger btnRemoveTeam" type="button">Remove</button>';
 	}
 	
 });

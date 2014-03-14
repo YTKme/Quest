@@ -37,6 +37,28 @@ class TeamController implements ControllerInterface {
 	}
 	
 	/**
+	 * 
+	 * @param Request $request
+	 * @param Application $application
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function status (Request $request, Application $application, $id) {
+		$host = $request->getSchemeAndHttpHost();
+		$sessionUsername = $application['session']->get('_USERNAME');
+		
+		// Validate user login
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
+		}
+		
+		return $application['twig']->render('team.status.html.twig', array(
+			'_USERNAME' => $sessionUsername,
+			'id' => $id
+		));
+	}
+	
+	/**
 	 * Add team
 	 *
 	 * @method POST
@@ -158,6 +180,7 @@ class TeamController implements ControllerInterface {
 	 * @method GET
 	 * @param Request $request
 	 * @param Application $application
+	 * @param integer $id
 	 * @return Response
 	 */
 	public function retrieveById (Request $request, Application $application, $id) {
@@ -192,6 +215,7 @@ class TeamController implements ControllerInterface {
 	 * @method GET
 	 * @param Request $request
 	 * @param Application $application
+	 * @param string $name
 	 * @return Response
 	 */
 	public function retrieveByName (Request $request, Application $application, $name) {

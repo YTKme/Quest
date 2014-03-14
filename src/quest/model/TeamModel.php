@@ -67,6 +67,7 @@ class TeamModel {
 			'teamId' => $this->getId(),
 			'teamName' => $this->getName(),
 			'teamPoint' => $this->getPoint(),
+			'teamEvent' => $this->getEvents(),
 			'teamTeamAchievements' => $this->getTeamAchievementsArray()
 		);
 	}
