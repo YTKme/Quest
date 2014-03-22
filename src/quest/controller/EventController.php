@@ -216,7 +216,7 @@ class EventController implements ControllerInterface {
 	 */
 	public function retrieveByCode (Request $request, Application $application, $code) {
 		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the event exist
 				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $code))) {
