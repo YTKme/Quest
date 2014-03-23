@@ -185,7 +185,9 @@ class EventController implements ControllerInterface {
 			try {
 				// Check if the event exist
 				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('id' => $id))) {
-					return $application->json($eventModel->toArray(), 200);
+					return $application->json($eventModel->toArray(), 200, array(
+                        'Access-Control-Allow-Origin' => '*'
+                    ));
 				}
 			} catch (DBALException $exception) {
 				return
