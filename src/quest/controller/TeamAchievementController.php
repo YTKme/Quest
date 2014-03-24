@@ -82,7 +82,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamAchievementArray, 201);
+			return $application->json($teamAchievementArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -107,7 +107,7 @@ class TeamAchievementController implements ControllerInterface {
 						$teamAchievementModels[$key] = $teamAchievementModels[$key]->toArray();
 					}
 			
-					return $application->json($teamAchievementModels, 200);
+					return $application->json($teamAchievementModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -190,7 +190,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200);
+			return $application->json($teamAchievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -244,7 +244,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200);
+			return $application->json($teamAchievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
