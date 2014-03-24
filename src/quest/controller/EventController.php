@@ -150,7 +150,9 @@ class EventController implements ControllerInterface {
 						$eventModels[$key] = $eventModels[$key]->toArray();
 					}
 	
-					return $application->json($eventModels, 200);
+					return $application->json($eventModels, 200, array(
+                        'Access-Control-Allow-Origin' => '*'
+                    ));
 				}
 			} catch (DBALException $exception) {
 				return
