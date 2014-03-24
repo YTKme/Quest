@@ -123,7 +123,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 201);
+			return $application->json($achievementArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -148,7 +148,7 @@ class AchievementController implements ControllerInterface {
 						$achievementModels[$key] = $achievementModels[$key]->toArray();
 					}
 		
-					return $application->json($achievementModels, 200);
+					return $application->json($achievementModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -182,7 +182,7 @@ class AchievementController implements ControllerInterface {
 			try {
 				// Check if the achievement exist
 				if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $id))) {
-					return $application->json($achievementModel->toArray(), 200);
+					return $application->json($achievementModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -282,7 +282,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200);
+			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -336,7 +336,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200);
+			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

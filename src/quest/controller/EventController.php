@@ -125,7 +125,7 @@ class EventController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($eventArray, 201);
+			return $application->json($eventArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -150,7 +150,7 @@ class EventController implements ControllerInterface {
 						$eventModels[$key] = $eventModels[$key]->toArray();
 					}
 	
-					return $application->json($eventModels, 200);
+					return $application->json($eventModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -185,7 +185,7 @@ class EventController implements ControllerInterface {
 			try {
 				// Check if the event exist
 				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('id' => $id))) {
-					return $application->json($eventModel->toArray(), 200);
+					return $application->json($eventModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -216,11 +216,11 @@ class EventController implements ControllerInterface {
 	 */
 	public function retrieveByCode (Request $request, Application $application, $code) {
 		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the event exist
 				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $code))) {
-					return $application->json($eventModel->toArray(), 200);
+					return $application->json($eventModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -323,7 +323,7 @@ class EventController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($eventArray, 200);
+			return $application->json($eventArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 	
 		return new Response('ERROR: Bad request.', 400);
@@ -377,7 +377,7 @@ class EventController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($eventArray, 200);
+			return $application->json($eventArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 	
 		return new Response('ERROR: Bad request.', 400);

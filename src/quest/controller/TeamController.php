@@ -128,7 +128,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamArray, 201);
+			return $application->json($teamArray, 201, array('Access-Control-Allow-Origin' => '*'));
 			
 		}
 		
@@ -154,7 +154,7 @@ class TeamController implements ControllerInterface {
 						$teamModels[$key] = $teamModels[$key]->toArray();
 					}
 		
-					return $application->json($teamModels, 200);
+					return $application->json($teamModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -189,7 +189,7 @@ class TeamController implements ControllerInterface {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('id' => $id))) {
-					return $application->json($teamModel->toArray(), 200);
+					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -224,7 +224,7 @@ class TeamController implements ControllerInterface {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
-					return $application->json($teamModel->toArray(), 200);
+					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -304,7 +304,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200);
+			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -358,7 +358,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200);
+			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

@@ -104,7 +104,7 @@ class UserController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($userArray, 201);
+			return $application->json($userArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -129,7 +129,7 @@ class UserController implements ControllerInterface {
 						$userModels[$key] = $userModels[$key]->toArray();
 					}
 			
-					return $application->json($userModels, 200);
+					return $application->json($userModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -163,7 +163,7 @@ class UserController implements ControllerInterface {
 			try {
 				// Check if the user exist
 				if ($userModel = $application['quest.orm.manager']->getRepository('UserModel')->findOneBy(array('id' => $id))) {
-					return $application->json($userModel->toArray(), 200);
+					return $application->json($userModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -258,7 +258,7 @@ class UserController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($userArray, 200);
+			return $application->json($userArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -312,7 +312,7 @@ class UserController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($userArray, 200);
+			return $application->json($userArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

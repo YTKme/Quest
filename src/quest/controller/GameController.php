@@ -109,7 +109,7 @@ class GameController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($gameArray, 201);
+			return $application->json($gameArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -134,7 +134,7 @@ class GameController implements ControllerInterface {
 						$gameModels[$key] = $gameModels[$key]->toArray();
 					}
 						
-					return $application->json($gameModels, 200);
+					return $application->json($gameModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -168,7 +168,7 @@ class GameController implements ControllerInterface {
 			try {
 				// Check if the game exist
 				if ($gameModel = $application['quest.orm.manager']->getRepository('GameModel')->findOneBy(array('id' => $id))) {
-					return $application->json($gameModel->toArray(), 200);
+					return $application->json($gameModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -253,7 +253,7 @@ class GameController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($gameArray, 200);
+			return $application->json($gameArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -307,7 +307,7 @@ class GameController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($gameArray, 200);
+			return $application->json($gameArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
