@@ -128,7 +128,9 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamArray, 201);
+			return $application->json($teamArray, 201, array(
+                        'Access-Control-Allow-Origin' => '*'
+                    ));
 			
 		}
 		
