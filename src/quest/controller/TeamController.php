@@ -131,7 +131,7 @@ class TeamController implements ControllerInterface {
 			return $application->json($teamArray, 201, array(
                         'Access-Control-Allow-Origin' => '*',
                         'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
-                        'Access-Control-Allow-Headers' => 'Content-Type'
+                        'Access-Control-Allow-Headers' => 'Content-Type',
                     ));
 			
 		}
