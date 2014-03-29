@@ -26,7 +26,7 @@ class TeamAchievementController implements ControllerInterface {
 	 */
 	public function add (Request $request, Application $application) {
 		// JSON and POST
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -82,7 +82,11 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamAchievementArray, 201);
+			return $application->json($teamAchievementArray, 201, array(
+                        'Access-Control-Allow-Origin' => '*',
+                        'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
+                        'Access-Control-Allow-Headers' => 'Content-Type',
+                    ));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
