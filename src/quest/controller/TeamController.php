@@ -68,7 +68,7 @@ class TeamController implements ControllerInterface {
 	 */
 	public function add (Request $request, Application $application) {
 		// JSON and POST
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
+		if (/*strpos($request->headers->get('Content-Type'), 'application/json') === 0 &&*/ strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
