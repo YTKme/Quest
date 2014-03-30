@@ -224,11 +224,13 @@ class TeamController implements ControllerInterface {
 	 */
 	public function retrieveByName (Request $request, Application $application, $name) {
 		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
-					return $application->json($teamModel->toArray(), 200);
+					return $application->json($teamModel->toArray(), 200, array(
+                        'Access-Control-Allow-Origin' => '*'
+                    ));
 				}
 			} catch (DBALException $exception) {
 				return
