@@ -144,7 +144,9 @@ class TeamAchievementController implements ControllerInterface {
 		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
-				return new Response('ERROR: Bad request.', 400);
+				return new Response('ERROR: Bad request.', 400, array(
+                    'Message' => 'Foo'
+                ));
 			}
 		
 			// Parse JSON data
