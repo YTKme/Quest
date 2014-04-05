@@ -194,7 +194,9 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200);
+			return $application->json($teamAchievementArray, 200, array(
+                        'Access-Control-Allow-Origin' => '*'
+            ));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
