@@ -150,9 +150,7 @@ class EventController implements ControllerInterface {
 						$eventModels[$key] = $eventModels[$key]->toArray();
 					}
 	
-					return $application->json($eventModels, 200, array(
-                        'Access-Control-Allow-Origin' => '*'
-                    ));
+					return $application->json($eventModels);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -224,9 +222,7 @@ class EventController implements ControllerInterface {
 			try {
 				// Check if the event exist
 				if ($eventModel = $application['quest.orm.manager']->getRepository('EventModel')->findOneBy(array('code' => $code))) {
-					return $application->json($eventModel->toArray(), 200, array(
-                        'Access-Control-Allow-Origin' => '*'
-                    ));
+					return $application->json($eventModel->toArray(), 200);
 				}
 			} catch (DBALException $exception) {
 				return

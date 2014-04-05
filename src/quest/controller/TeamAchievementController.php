@@ -82,11 +82,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamAchievementArray, 201, array(
-                        'Access-Control-Allow-Origin' => '*',
-                        'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
-                        'Access-Control-Allow-Headers' => 'Content-Type',
-                    ));
+			return $application->json($teamAchievementArray, 201);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -194,11 +190,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200, array(
-                    'Access-Control-Allow-Origin' => '*',
-                    'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'PUT'],
-                    'Access-Control-Allow-Headers' => ['accept', 'content-type'],
-            ));
+			return $application->json($teamAchievementArray, 200);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

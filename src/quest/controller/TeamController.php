@@ -128,11 +128,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamArray, 201, array(
-                        'Access-Control-Allow-Origin' => '*',
-                        'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
-                        'Access-Control-Allow-Headers' => 'Content-Type',
-                    ));
+			return $application->json($teamArray, 201);
 			
 		}
 		
@@ -228,9 +224,7 @@ class TeamController implements ControllerInterface {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
-					return $application->json($teamModel->toArray(), 200, array(
-                        'Access-Control-Allow-Origin' => '*'
-                    ));
+					return $application->json($teamModel->toArray(), 200);
 				}
 			} catch (DBALException $exception) {
 				return
