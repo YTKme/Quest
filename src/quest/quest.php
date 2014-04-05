@@ -27,6 +27,8 @@ foreach ($config as $key => $value) {
 	$application[$key] = $value;
 }
 
+$application->after($application["cors"]);
+
 /*
  * BOOT
  */
