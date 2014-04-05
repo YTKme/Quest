@@ -199,11 +199,13 @@ class TeamAchievementController implements ControllerInterface {
 			return $application->json($teamAchievementArray, 200, array(
                     'Access-Control-Allow-Origin' => '*',
                     'Access-Control-Allow-Methods' => ['OPTIONS', 'PUT'],
-                    'Access-Control-Allow-Headers' => ['Accept', 'Content-Type'],
+                    'Access-Control-Allow-Headers' => ['accept', 'content-type'],
             ));
 		}
 		
-		return new Response('ERROR: Bad request.', 400);
+		return new Response('ERROR: Bad request.', 400, array(
+            'Message' => 'Foo'
+        ));
 	}
 	
 	/**
