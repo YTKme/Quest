@@ -196,7 +196,7 @@ class TeamAchievementController implements ControllerInterface {
 				
 			return $application->json($teamAchievementArray, 200, array(
                     'Access-Control-Allow-Origin' => '*',
-                    'Access-Control-Allow-Methods' => ['OPTIONS', 'PUT'],
+                    'Access-Control-Allow-Methods' => '*',
                     'Access-Control-Allow-Headers' => '*',
             ));
 		}
