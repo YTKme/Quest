@@ -144,9 +144,7 @@ class TeamAchievementController implements ControllerInterface {
 		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
-				return new Response('ERROR: Bad request.', 400, array(
-                    'Message' => 'Foo'
-                ));
+				return new Response('ERROR: Bad request.', 400);
 			}
 		
 			// Parse JSON data
@@ -198,14 +196,12 @@ class TeamAchievementController implements ControllerInterface {
 				
 			return $application->json($teamAchievementArray, 200, array(
                     'Access-Control-Allow-Origin' => '*',
-                    'Access-Control-Allow-Methods' => ['OPTIONS', 'PUT'],
+                    'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST', 'PUT'],
                     'Access-Control-Allow-Headers' => ['accept', 'content-type'],
             ));
 		}
 		
-		return new Response('ERROR: Bad request.', 400, array(
-            'Message' => 'Foo'
-        ));
+		return new Response('ERROR: Bad request.', 400);
 	}
 	
 	/**
