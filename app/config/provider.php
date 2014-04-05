@@ -3,5 +3,6 @@
 return array(
 	new \Silex\Provider\DoctrineServiceProvider(),
 	new \Silex\Provider\TwigServiceProvider(),
-	new \Silex\Provider\SessionServiceProvider()
+	new \Silex\Provider\SessionServiceProvider(),
+    new \Silex\Provider\CorsServiceProvider(),
 );
