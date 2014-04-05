@@ -141,7 +141,7 @@ class TeamAchievementController implements ControllerInterface {
 	*/
 	public function edit (Request $request, Application $application) {
 		// JSON and PUT
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
