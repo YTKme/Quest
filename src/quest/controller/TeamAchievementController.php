@@ -152,7 +152,7 @@ class TeamAchievementController implements ControllerInterface {
 					
 				foreach ($jsonData as $teamAchievement) {
 					// Check if the team achievement exist
-					if ($teamAchievementModel = $application['quest.orm.manager']->getRepository('TeamAchievementModel')->findOneBy(array('id' => $teamAchievement['id']))) {
+					if ($teamAchievementModel = $application['quest.orm.manager']->getRepository('TeamAchievementModel')->findOneBy(array('id' => $teamAchievement['achievement']))) {
 						// Update team achievement
 						$teamAchievementModel->setPicture(
 							empty($teamAchievement['picture'])
