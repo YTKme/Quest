@@ -33,6 +33,6 @@ foreach ($config as $key => $value) {
  * BOOT
  */
 $application->boot();
-$application->after($application["cors"]);
+//$application->after($application["cors"]);
 
 return $application;
