@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class TeamController implements ControllerInterface {
@@ -26,12 +27,34 @@ class TeamController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 	
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
-			//return new RedirectResponse($host);
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
 		}
 	
 		return $application['twig']->render('team.html.twig', array(
 			'_USERNAME' => $sessionUsername
+		));
+	}
+	
+	/**
+	 * 
+	 * @param Request $request
+	 * @param Application $application
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function status (Request $request, Application $application, $id) {
+		$host = $request->getSchemeAndHttpHost();
+		$sessionUsername = $application['session']->get('_USERNAME');
+		
+		// Validate user login
+		if (empty($sessionUsername)) {
+			return new RedirectResponse($host);
+		}
+		
+		return $application['twig']->render('team.status.html.twig', array(
+			'_USERNAME' => $sessionUsername,
+			'id' => $id
 		));
 	}
 	
@@ -86,13 +109,13 @@ class TeamController implements ControllerInterface {
 						// Store team
 						$application['quest.orm.manager']->persist($teamModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read team into the array
 					array_push($teamArray, $teamModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
@@ -105,7 +128,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamArray, 201);
+			return $application->json($teamArray, 201, array('Access-Control-Allow-Origin' => '*'));
 			
 		}
 		
@@ -131,7 +154,7 @@ class TeamController implements ControllerInterface {
 						$teamModels[$key] = $teamModels[$key]->toArray();
 					}
 		
-					return $application->json($teamModels, 200);
+					return $application->json($teamModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -146,6 +169,76 @@ class TeamController implements ControllerInterface {
 			}
 		
 			return new Response('ERROR: Unable to retrieve team.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
+	 * Retrieve team by ID
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @param integer $id
+	 * @return Response
+	 */
+	public function retrieveById (Request $request, Application $application, $id) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the team exist
+				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('id' => $id))) {
+					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve team by ID.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+				
+			return new Response('ERROR: Unable to retrieve team by ID.', 404);
+		}
+		
+		return new Response('ERROR: Bad request.', 400);
+	}
+	
+	/**
+	 * Retrieve team by name
+	 *
+	 * @method GET
+	 * @param Request $request
+	 * @param Application $application
+	 * @param string $name
+	 * @return Response
+	 */
+	public function retrieveByName (Request $request, Application $application, $name) {
+		// JSON and GET
+		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+			try {
+				// Check if the team exist
+				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
+					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
+				}
+			} catch (DBALException $exception) {
+				return
+					$application['debug']
+						? new Response('DBAL Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Unable to retrieve team by name.', 500);
+			} catch (Exception $exception) {
+				return
+					$application['debug']
+						? new Response('Exception: ' . $exception->getMessage(), 500)
+						: new Response('ERROR: Failure.', 500);
+			}
+			
+			return new Response('ERROR: Unable to retrieve team by name.', 404);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -211,7 +304,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200);
+			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -265,7 +358,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200);
+			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

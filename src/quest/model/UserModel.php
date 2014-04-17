@@ -32,14 +32,19 @@ class UserModel {
 	protected $role = NULL;
 	
 	/**
-	 * @Column(name="first_name")
+	 * @Column(name="first_name", nullable=true)
 	 */
 	protected $firstName = NULL;
 	
 	/**
-	 * @Column(name="last_name")
+	 * @Column(name="last_name", nullable=true)
 	 */
 	protected $lastName = NULL;
+	
+	/**
+	 * @Column(name="last_login", nullable=true)
+	 */
+	protected $lastLogin = NULL;
 	
 	/**
 	 * Constructor
@@ -47,6 +52,10 @@ class UserModel {
 	 * @param string $id
 	 * @param string $username
 	 * @param string $password
+	 * @param string $role
+	 * @param string $firstName
+	 * @param string $lastName
+	 * @param string $lastLogin
 	 */
 	public function __construct (
 		$id = NULL,
@@ -54,7 +63,8 @@ class UserModel {
 		$password = NULL,
 		$role = NULL,
 		$firstName = NULL,
-		$lastName = NULL
+		$lastName = NULL,
+		$lastLogin = NULL
 	) {
 		$this->id = $id;
 		$this->username = $username;
@@ -62,6 +72,10 @@ class UserModel {
 		$this->role = $role;
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
+		$this->lastLogin =
+			empty($lastLogin)
+				? NULL
+				: new DateTime($lastLogin);
 	}
 	
 	/**
@@ -71,11 +85,12 @@ class UserModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'username' => $this->getUsername(),
-			'role' => $this->getRole(),
-			'firstName' => $this->getFirstName(),
-			'lastName' => $this->getLastName()
+			'userId' => $this->getId(),
+			'userUsername' => $this->getUsername(),
+			'userRole' => $this->getRole(),
+			'userFirstName' => $this->getFirstName(),
+			'userLastName' => $this->getLastName(),
+			'userLastLogin' => $this->getLastLogin()
 		);
 	}
 	
@@ -176,6 +191,27 @@ class UserModel {
 	 */
 	public function setLastName ($lastName = NULL) {
 		$this->lastName = $lastName;
+	}
+	
+	/**
+	 * Get last login
+	 * 
+	 * @return DateTime
+	 */
+	public function getLastLogin () {
+		return $this->lastLogin;
+	}
+	
+	/**
+	 * Set last login
+	 * 
+	 * @param string $lastLogin
+	 */
+	public function setLastLogin ($lastLogin = NULL) {
+		$this->lastLogin =
+			empty($lastLogin)
+				? NULL
+				: new DateTime($lastLogin);
 	}
 	
 }

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{#########
+ # Title #
+ #########}
+{% block title %}Main{% endblock %}
+
+{##############################
+ # Cascading Style Sheet Head #
+ ##############################}
+{% block csshead %}{% endblock %}
+
+{###################
+ # JavaScript Head #
+ ###################}
+{% block jshead %}{% endblock %}
+
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+<script type="text/javascript" src="{{ RESOURCE }}/js/team.achievement.js"></script>
+{% endblock %}
+
+{########
+ # Body #
+ ########}
+{% block body %}
+
+<header class="page-header container">
+	<h2 name="team-{{ id }}">Team Status</h2>
+</header>
+
+<div id="msgAlert"></div>
+
+<aside>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 id="teamName" class="panel-title"></h3>
+		</div>
+		<div class="panel-body">
+			<p>Team Information</p>
+		</div>
+		
+		<div class="list-group">
+			<a class="list-group-item active">
+				<h4 class="list-group-item-heading"></h4>
+			</a>
+			<a href="#" class="list-group-item">Achievement Needed</a>
+			<a href="#" class="list-group-item list-group-item-success">Achievement Complete</a>
+			<a href="#" class="list-group-item list-group-item-warning">Achievement Pending</a>
+		</div>
+	</div>
+	
+</aside>
+		
+{% endblock %}
+
+{###################
+ # JavaScript Tail #
+ ###################}
+{% block jstail %}{% endblock %}

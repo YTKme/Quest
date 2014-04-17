@@ -14,10 +14,9 @@
 		
 		<!-- JavaScript Head -->
 		<script type="text/javascript" src="{{ RESOURCE }}/js/jquery-2.0.3.min.js"></script>
-		<script type="text/javascript" src="{{ RESOURCE }}/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ RESOURCE }}/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script type="text/javascript" src="{{ RESOURCE }}/js/less-1.6.0.min.js"></script>
-		<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
 		{% block jshead %}{% endblock %}
 		
 		{% block mischead %}{% endblock %}
@@ -42,13 +41,25 @@
 					</div>
 					<div id="navigationHead" class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="{{ HOST }}/">Home</a></li>
+							<li{{ (PATH == '/' or PATH == '/main') ? ' class="active"' : '' }}><a href="{{ HOST }}/">Home</a></li>
+							
+							{% if _USERNAME %}
+							<li{{ (PATH == '/user') ? ' class="active"' : '' }}><a href="{{ HOST }}/user">User</a></li>
+							<li{{ (PATH == '/team') ? ' class="active"' : '' }}><a href="{{ HOST }}/team">Team</a></li>
+							<li{{ (PATH == '/event') ? ' class="active"' : '' }}><a href="{{ HOST }}/event">Event</a></li>
+							<li{{ (PATH == '/game') ? ' class="active"' : '' }}><a href="{{ HOST }}/game">Game</a></li>
+							<li{{ (PATH == '/achievement') ? ' class="active"' : '' }}><a href="{{ HOST }}/achievement">Achievement</a></li>
+							{% endif %}
+							
 						</ul>
-						{% if _USERNAME %}
 						<ul class="nav navbar-nav navbar-right">
+							
+							{% if _USERNAME %}
+							<li{{ (PATH == '/documentation') ? ' class="active"' : '' }}><a href="{{ HOST }}/documentation">Documentation</a></li>
 							<li><a href="{{ HOST }}/logout">Logout</a></li>
+							{% endif %}
+							
 						</ul>
-						{% endif %}
 					</div>
 				</div>
 			</nav>

@@ -1,10 +1,23 @@
 [
 	{
-		"name": "Team I",
-		"point": "0"
+		"id": "1",
+		"name": "Alpha",
+		"point": "0",
+		"events":  [
+			{"id": "1"}
+		]
 	},
 	{
-		"name": "Team II",
+		"id": "2",
+		"name": "Beta",
+		"point": "0",
+		"events":  [
+			{"id": "1"}
+		]
+	},
+	{
+		"id": "3",
+		"name": "Gamma",
 		"point": "0",
 		"events":  [
 			{"id": "1"}

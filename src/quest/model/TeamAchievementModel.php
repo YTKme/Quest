@@ -59,10 +59,10 @@ class TeamAchievementModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'team' => $this->getTeam()->toTeamAchievementArray(),
-			'achievement' => $this->getAchievement()->toGameArray(),
-			'picture' => $this->getPicture()
+			'teamAchievementId' => $this->getId(),
+			'teamAchievementTeam' => $this->getTeam()->toTeamAchievementArray(),
+			'teamAchievementAchievement' => $this->getAchievement()->toGameArray(),
+			'teamAchievementPicture' => $this->getPicture()
 		);
 	}
 	

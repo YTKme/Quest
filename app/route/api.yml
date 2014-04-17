@@ -9,6 +9,11 @@ api.user.retrieve:
   defaults: { _controller: 'UserController::retrieve' }
   methods: [GET]
 
+api.user.retrieve.id:
+  path: /user/retrieve/id/{id}
+  defaults: { _controller: 'UserController::retrieveById' }
+  methods: [GET]
+
 api.user.edit:
   path: /user/edit
   defaults: { _controller: 'UserController::edit' }
@@ -17,6 +22,37 @@ api.user.edit:
 api.user.remove:
   path: /user/remove
   defaults: { _controller: 'UserController::remove' }
+  methods: [DELETE]
+
+# Team
+api.team.add:
+  path: /team/add
+  defaults: { _controller: 'TeamController::add' }
+  methods: [POST]
+
+api.team.retrieve:
+  path: /team/retrieve
+  defaults: { _controller: 'TeamController::retrieve' }
+  methods: [GET]
+
+api.team.retrieve.id:
+  path: /team/retrieve/id/{id}
+  defaults: { _controller: 'TeamController::retrieveById' }
+  methods: [GET]
+
+api.team.retrieve.name:
+  path: /team/retrieve/name/{name}
+  defaults: { _controller: 'TeamController::retrieveByName' }
+  methods: [GET]
+
+api.team.edit:
+  path: /team/edit
+  defaults: { _controller: 'TeamController::edit' }
+  methods: [PUT]
+
+api.team.remove:
+  path: /team/remove
+  defaults: { _controller: 'TeamController::remove' }
   methods: [DELETE]
 
 # Event
@@ -28,6 +64,11 @@ api.event.add:
 api.event.retrieve:
   path: /event/retrieve
   defaults: { _controller: 'EventController::retrieve' }
+  methods: [GET]
+
+api.event.retrieve.id:
+  path: /event/retrieve/id/{id}
+  defaults: { _controller: 'EventController::retrieveById' }
   methods: [GET]
 
 api.event.retrieve.code:
@@ -95,27 +136,6 @@ api.achievement.edit:
 api.achievement.remove:
   path: /achievement/remove
   defaults: { _controller: 'AchievementController::remove' }
-  methods: [DELETE]
-
-# Team
-api.team.add:
-  path: /team/add
-  defaults: { _controller: 'TeamController::add' }
-  methods: [POST]
-
-api.team.retrieve:
-  path: /team/retrieve
-  defaults: { _controller: 'TeamController::retrieve' }
-  methods: [GET]
-
-api.team.edit:
-  path: /team/edit
-  defaults: { _controller: 'TeamController::edit' }
-  methods: [PUT]
-
-api.team.remove:
-  path: /team/remove
-  defaults: { _controller: 'TeamController::remove' }
   methods: [DELETE]
 
 # Team Achievement

@@ -1,7 +1,16 @@
 [
 	{
-		"name": "Achievement I",
-		"description": "Achievement I",
+		"name": "CISCO Culture",
+		"description": "How do you contribute to Cisco's company culture? Use your shadow to find our culture.",
+		"icon": "https://www.google.com/images/srpr/logo11w.png",
+		"latitude": "37 20.453",
+		"longitude": "-121 53.492",
+		"point": "10",
+		"game": "1"
+	},
+	{
+		"name": "Giant's Rival",
+		"description": "Cisco is named after San Francisco, but we're still #1 in compatibility. Find our name on the SF Giant's rival's jersey.",
 		"icon": "https://www.google.com/images/srpr/logo11w.png",
 		"latitude": "37 20.453",
 		"longitude": "-121 53.492",
@@ -9,8 +18,8 @@
 		"game": "1"
 	},
 	{
-		"name": "Achievement II",
-		"description": "Achievement II",
+		"name": "Framed Lady",
+		"description": "Pictures don't only move in Harry Potter, find the lady in the frame.",
 		"icon": "https://www.google.com/images/srpr/logo11w.png",
 		"latitude": "37 20.453",
 		"longitude": "-121 53.492",
@@ -18,8 +27,17 @@
 		"game": "1"
 	},
 	{
-		"name": "Achievement III",
-		"description": "Achievement III",
+		"name": "Van Ness Avenue",
+		"description": "Get in touch with our San Francisco roots, find the meeting room named after Van Ness Avenue.",
+		"icon": "https://www.google.com/images/srpr/logo11w.png",
+		"latitude": "37 20.453",
+		"longitude": "-121 53.492",
+		"point": "0",
+		"game": "1"
+	},
+	{
+		"name": "Connected Life",
+		"description": "Disney's smart house isn't far away. Find the Cisco Connected Life at Home display room.",
 		"icon": "https://www.google.com/images/srpr/logo11w.png",
 		"latitude": "37 20.453",
 		"longitude": "-121 53.492",

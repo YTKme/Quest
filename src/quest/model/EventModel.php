@@ -27,17 +27,17 @@ class EventModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="description")
+	 * @Column(name="description", nullable=true)
 	 */
 	protected $description = NULL;
 	
 	/**
-	 * @Column(name="start", type="datetimetz")
+	 * @Column(name="start", type="datetimetz", nullable=true)
 	 */
 	protected $start = NULL;
 	
 	/**
-	 * @Column(name="length", type="time")
+	 * @Column(name="length", type="time", nullable=true)
 	 */
 	protected $length = NULL;
 	
@@ -96,13 +96,13 @@ class EventModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'code' => $this->getCode(),
-			'name' => $this->getName(),
-			'description' => $this->getDescription(),
-			'start' => $this->getStart(),
-			'length' => $this->getLength(),
-			'game' => empty($this->getGame())
+			'eventId' => $this->getId(),
+			'eventCode' => $this->getCode(),
+			'eventName' => $this->getName(),
+			'eventDescription' => $this->getDescription(),
+			'eventStart' => $this->getStart(),
+			'eventLength' => $this->getLength(),
+			'eventGame' => empty($this->getGame())
 				? NULL
 				: $this->getGame()->toArray()
 		);

@@ -22,6 +22,7 @@
 {% include 'inc/datatables.html.twig' %}
 
 <!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/main.js"></script>
 <script type="text/javascript" src="{{ RESOURCE }}/js/user.js"></script>
 {% endblock %}
 
@@ -34,8 +35,10 @@
 	<h2>User</h2>
 </header>
 
+<div id="msgAlert"></div>
+
 <aside>
-	<p><button id="btnAddUser" class="btn btn-success" type="button">Add User</button></p>
+	<p><button id="btnAddUser" class="btn btn-success" type="button">Add</button></p>
 	<table id="dTable" class="table tblUser">
 		<thead>
 			<tr>
@@ -47,19 +50,44 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>
-					<button id="btnEditUser-0" class="btn btn-primary btnEditUser" type="button">Edit User</button>
-					<button id="btnRemoveUser-0" class="btn btn-danger btnRemoveUser" type="button">Remove User</button>
-				</td>
-			</tr>
 		</tbody>
 	</table>
 </aside>
+
+<div id="dlgUserInformation" class="hide">
+	<form id="frmUserInformation" role="form">
+		<div id="msgState"></div>
+		<div class="form-group">
+			<label for="txtUsername">Username</label>
+			<input id="txtUsername" class="form-control" type="text" placeholder="Username" />
+		</div>
+		<div class="form-group">
+			<label for="txtPassword">Password</label>
+			<input id="txtPassword" class="form-control" type="password" placeholder="Password" />
+		</div>
+		<div class="form-group">
+			<label for="txtConfirmPassword">Confirm Password</label>
+			<input id="txtConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" />
+		</div>
+		<div class="form-group">
+			<label for="txtFirstName">First Name</label>
+			<input id="txtFirstName" class="form-control" type="text" placeholder="First Name" />
+		</div>
+		<div class="form-group">
+			<label for="txtLastName">Last Name</label>
+			<input id="txtLastName" class="form-control" type="text" placeholder="Last Name" />
+		</div>
+		<div class="form-group">
+			<label for="ddRole">Role</label>
+			<select id="ddRole" class="form-control" name="ddRole">
+				<option value="ADMINISTRATOR">Administrator</option>
+			</select>
+		</div>
+	</form>
+</div>
+
+<div id="dlgRemoveUser" class="hide">
+</div>
 		
 {% endblock %}
 

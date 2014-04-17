@@ -1,0 +1,630 @@
+{% extends 'base.html.twig' %}
+
+{#########
+ # Title #
+ #########}
+{% block title %}Main{% endblock %}
+
+{##############################
+ # Cascading Style Sheet Head #
+ ##############################}
+{% block csshead %}{% endblock %}
+
+{###################
+ # JavaScript Head #
+ ###################}
+{% block jshead %}{% endblock %}
+
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+{% include 'inc/snippet.html.twig' %}
+
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/documentation.js"></script>
+{% endblock %}
+
+{########
+ # Body #
+ ########}
+{% block body %}
+
+<header class="page-header container">
+	<h2>Documentation</h2>
+</header>
+
+<aside class="col-lg-2 col-md-2">
+	<div class="list-group">
+		<a id="lstNavigationUser" href="#" class="list-group-item">User</a>
+		<a id="lstNavigationTeam" href="#" class="list-group-item">Team</a>
+		<a id="lstNavigationEvent" href="#" class="list-group-item">Event</a>
+		<a id="lstNavigationGame" href="#" class="list-group-item">Game</a>
+		<a id="lstNavigationAchievement" href="#" class="list-group-item">Achievement</a>
+		<a id="lstNavigationTeamAchievement" href="#" class="list-group-item">Team Achievement</a>
+	</div>
+</aside>
+
+<section class="col-lg-10 col-md-10">
+
+	<!--
+	========
+	= USER =
+	========
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdUser">User</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add User</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/user/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"username": "username",</span>
+		<span class="required">"password": "password",</span>
+		<span class="required">"role": "ROLE",</span>
+		<span class="optional">"firstName": "firstName",</span>
+		<span class="optional">"lastName": "lastName"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve User</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/user/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit User</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/user/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="required">"username": "username",</span>
+		<span class="required">"password": "password",</span>
+		<span class="required">"role": "ROLE",</span>
+		<span class="optional">"firstName": "firstName",</span>
+		<span class="optional">"lastName": "lastName"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove User</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/user/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"username": "username",</span>
+		<span class="optional">"password": "password",</span>
+		<span class="optional">"role": "ROLE",</span>
+		<span class="optional">"firstName": "firstName",</span>
+		<span class="optional">"lastName": "lastName"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<!--
+	========
+	= TEAM =
+	========
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdTeam">Team</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add Team</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/team/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"name": "name",</span>
+		<span class="optional">"point": "0"</span>
+	}
+]
+			</pre>
+			
+			<pre class="code">
+[
+	{
+		<span class="required">"name": "name",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"events":  [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Team</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/team/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Team By Name</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/team/retrieve/name/{name}</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit Team</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/team/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"events":  [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove Team</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/team/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"events":  [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<!--
+	=========
+	= EVENT =
+	=========
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdEvent">Event</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add Event</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/event/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"start": "YYYY-MM-DD HH:MM:SS",</span>
+		<span class="optional">"length": "HH:MM:SS",</span>
+		<span class="optional">"game": "id",</span>
+		<span class="optional">"teams": [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Event</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/event/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Event By Code</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/event/retrieve/code/{code}</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit Event</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/event/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"code": "code",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"start": "YYYY-MM-DD HH:MM:SS",</span>
+		<span class="optional">"length": "HH:MM:SS",</span>
+		<span class="optional">"game": "3",</span>
+		<span class="optional">"teams": [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove Event</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/event/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"code": "code",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"start": "YYYY-MM-DD HH:MM:SS",</span>
+		<span class="optional">"length": "HH:MM:SS",</span>
+		<span class="optional">"game": "id",</span>
+		<span class="optional">"teams": [
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<!--
+	========
+	= GAME =
+	========
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdGame">Game</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add Game</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/game/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"location": "location",</span>
+		<span class="optional">"achievements": [
+			{"id": "id"},
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Game</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/game/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Game By ID</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/game/retrieve/id/{id}</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit Game</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/game/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"location": "location",</span>
+		<span class="optional">"achievements": [
+			{"id": "id"},
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove Game</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/game/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"location": "location",</span>
+		<span class="optional">"achievements": [
+			{"id": "id"},
+			{"id": "id"}
+		]</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<!--
+	===============
+	= ACHIEVEMENT =
+	===============
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdAchievement">Achievement</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/achievement/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"icon": "link",</span>
+		<span class="optional">"latitude": "latitude",</span>
+		<span class="optional">"longitude": "longitude",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"game": "id"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/achievement/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/achievement/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"icon": "link",</span>
+		<span class="optional">"latitude": "latitude",</span>
+		<span class="optional">"longitude": "longitude",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"game": "id"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/achievement/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"id": "id",</span>
+		<span class="optional">"name": "name",</span>
+		<span class="optional">"description": "description",</span>
+		<span class="optional">"icon": "link",</span>
+		<span class="optional">"latitude": "latitude",</span>
+		<span class="optional">"longitude": "longitude",</span>
+		<span class="optional">"point": "0",</span>
+		<span class="optional">"game": "id"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<!--
+	====================
+	= TEAM ACHIEVEMENT =
+	====================
+	-->
+	<header class="row">
+		<h3 class="col-lg-10" name="hdTeamAchievement">Team Achievement</h3>
+		<div class="col-lg-2 textRight">
+			<button class="btn btn-default btnTop" type="button">
+				<span class="glyphicon glyphicon-arrow-up"></span> Top
+			</button>
+		</div>
+	</header>
+	<section class="panel panel-primary">
+		<div class="panel-heading">Add Team Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>POST</code></p>
+			<p><strong>URL: </strong><code>/api/teamachievement/add</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"team": "id",</span>
+		<span class="required">"achievement": "id",</span>
+		<span class="required">"picture": "link"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Retrieve Team Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>GET</code></p>
+			<p><strong>URL: </strong><code>/api/teamachievement/retrieve</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Edit Team Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>PUT</code></p>
+			<p><strong>URL: </strong><code>/api/teamachievement/edit</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"team": "id",</span>
+		<span class="required">"achievement": "id",</span>
+		<span class="required">"picture": "link"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+	
+	<section class="panel panel-primary">
+		<div class="panel-heading">Remove Team Achievement</div>
+		<div class="panel-body">
+			<p><strong>Method: </strong><code>DELETE</code></p>
+			<p><strong>URL: </strong><code>/api/teamachievement/remove</code></p>
+			<p><strong>Header (Content-Type): </strong><code>application/json</code></p>
+			<p><strong>Body (JSON):</strong></p>
+			<pre class="code">
+[
+	{
+		<span class="required">"team": "id",</span>
+		<span class="required">"achievement": "id",</span>
+		<span class="optional">"picture": "link"</span>
+	}
+]
+			</pre>
+		</div>
+	</section>
+
+</section>
+		
+{% endblock %}
+
+{###################
+ # JavaScript Tail #
+ ###################}
+{% block jstail %}{% endblock %}

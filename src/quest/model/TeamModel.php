@@ -22,7 +22,7 @@ class TeamModel {
 	protected $name = NULL;
 	
 	/**
-	 * @Column(name="point", type="integer")
+	 * @Column(name="point", type="integer", nullable=true)
 	 */
 	protected $point = NULL;
 	
@@ -64,10 +64,11 @@ class TeamModel {
 	 */
 	public function toArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'point' => $this->getPoint(),
-			'teamAchievements' => $this->getTeamAchievementsArray()
+			'teamId' => $this->getId(),
+			'teamName' => $this->getName(),
+			'teamPoint' => $this->getPoint(),
+			'teamEvent' => $this->getEvents(),
+			'teamTeamAchievements' => $this->getTeamAchievementsArray()
 		);
 	}
 	
@@ -78,9 +79,9 @@ class TeamModel {
 	 */
 	public function toTeamAchievementArray () {
 		return array(
-			'id' => $this->getId(),
-			'name' => $this->getName(),
-			'point' => $this->getPoint()
+			'teamId' => $this->getId(),
+			'teamName' => $this->getName(),
+			'teamPoint' => $this->getPoint()
 		);
 	}
 	

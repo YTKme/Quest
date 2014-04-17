@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class TeamAchievementController implements ControllerInterface {
@@ -62,13 +63,13 @@ class TeamAchievementController implements ControllerInterface {
 						// Store team achievement
 						$application['quest.orm.manager']->persist($teamAchievementModel);
 					}
-						
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read team achievement into the array
 					array_push($teamAchievementArray, $teamAchievementModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
@@ -81,7 +82,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamAchievementArray, 201);
+			return $application->json($teamAchievementArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -106,7 +107,7 @@ class TeamAchievementController implements ControllerInterface {
 						$teamAchievementModels[$key] = $teamAchievementModels[$key]->toArray();
 					}
 			
-					return $application->json($teamAchievementModels, 200);
+					return $application->json($teamAchievementModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -189,7 +190,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200);
+			return $application->json($teamAchievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -243,7 +244,7 @@ class TeamAchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamAchievementArray, 200);
+			return $application->json($teamAchievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

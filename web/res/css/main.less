@@ -1,18 +1,38 @@
+@headingMargin: 20px;
+
 body {
 
+}
+
+.code {
+	> .required {
+		color: #f00;
+	}
+	
+	> .optional {
+		color: #00f;
+	}
 }
 
 .hide {
 	display: none;
 }
 
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .textCenter {
 	text-align: center;
 }
 
+.textRight {
+	text-align: right;
+}
+
 .frmLoginHeader {
-	margin-left: auto;
-	margin-right: auto;
+	.center;
 	width: 350px;
 }
 
@@ -21,8 +41,41 @@ body {
 	width: 350px;
 }
 
+.btnTop {
+	margin-top: @headingMargin / 2;
+}
+
 .tblUser {
 	th {
 		width: 20%;
+	}
+}
+
+.tblTeam {	
+	th {
+		width: 25%;
+	}
+}
+
+.tblEvent {
+}
+
+.tblAchievement {	
+	th {
+		width: 25%;
+	}
+	
+	td:nth-child(2) {
+		.textCenter;
+	}
+	
+	.icoAchievement {
+		max-height: 64px;
+	}
+}
+
+#dTable {
+	th, td {
+		vertical-align: middle;
 	}
 }

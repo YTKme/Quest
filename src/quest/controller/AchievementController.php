@@ -4,6 +4,7 @@ use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\DBAL\DBALException;
 
 class AchievementController implements ControllerInterface {
@@ -26,7 +27,7 @@ class AchievementController implements ControllerInterface {
 		$sessionUsername = $application['session']->get('_USERNAME');
 	
 		// Validate user login
-		if (empty($application['session']->get('_USERNAME'))) {
+		if (empty($sessionUsername)) {
 			//return new RedirectResponse($host);
 		}
 	
@@ -103,13 +104,13 @@ class AchievementController implements ControllerInterface {
 						// Store achievement
 						$application['quest.orm.manager']->persist($achievementModel);
 					}
-			
+					
+					// Synchronize with database
+					$application['quest.orm.manager']->flush();
+					
 					// Push created and or read achievement into the array
 					array_push($achievementArray, $achievementModel->toArray());
 				}
-					
-				// Synchronize with database
-				$application['quest.orm.manager']->flush();
 			} catch (DBALException $exception) {
 				return
 					$application['debug']
@@ -122,7 +123,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 201);
+			return $application->json($achievementArray, 201, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -147,7 +148,7 @@ class AchievementController implements ControllerInterface {
 						$achievementModels[$key] = $achievementModels[$key]->toArray();
 					}
 		
-					return $application->json($achievementModels, 200);
+					return $application->json($achievementModels, 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -181,7 +182,7 @@ class AchievementController implements ControllerInterface {
 			try {
 				// Check if the achievement exist
 				if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $id))) {
-					return $application->json($achievementModel->toArray(), 200);
+					return $application->json($achievementModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
 				}
 			} catch (DBALException $exception) {
 				return
@@ -281,7 +282,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200);
+			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -335,7 +336,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200);
+			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

@@ -33,9 +33,12 @@ return array(
 		$loader = new Twig_Loader_Filesystem(__DIR__ . '/../../src/quest/view');
 		$twig = new Twig_Environment($loader);
 		$host = $application['request']->getSchemeAndHttpHost();
+		$path = $application['request']->getPathInfo();
 		
+		//$twig->addGlobal('APPLICATION', $application);
 		$twig->addGlobal('RESOURCE', '/web/res');
 		$twig->addGlobal('HOST', $host);
+		$twig->addGlobal('PATH', $path);
 		
 		return $twig;
 	}))
