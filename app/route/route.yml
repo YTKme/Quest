@@ -38,6 +38,15 @@ achievement:
   path: /achievement
   defaults: { _controller: 'AchievementController::main' }
 
+# Upload
+upload:
+  path: /upload
+  defaults: { _controller: 'UploadController::main' }
+
+upload.process:
+  path: /upload/process
+  defaults: { _controller: 'UploadController::process' }
+
 # Documentation
 documentation:
   path: /documentation

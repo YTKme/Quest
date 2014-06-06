@@ -67,8 +67,8 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function add (Request $request, Application $application) {
-		// JSON and POST
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
+		// POST
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -128,7 +128,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($teamArray, 201, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($teamArray, 201);
 			
 		}
 		
@@ -144,8 +144,8 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function retrieve (Request $request, Application $application) {
-		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		// GET
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the team exist
 				if ($teamModels = $application['quest.orm.manager']->getRepository('TeamModel')->findAll()) {
@@ -154,7 +154,7 @@ class TeamController implements ControllerInterface {
 						$teamModels[$key] = $teamModels[$key]->toArray();
 					}
 		
-					return $application->json($teamModels, 200, array('Access-Control-Allow-Origin' => '*'));
+					return $application->json($teamModels, 200);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -184,12 +184,12 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function retrieveById (Request $request, Application $application, $id) {
-		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		// GET
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('id' => $id))) {
-					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
+					return $application->json($teamModel->toArray(), 200);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -219,12 +219,12 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function retrieveByName (Request $request, Application $application, $name) {
-		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		// GET
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the team exist
 				if ($teamModel = $application['quest.orm.manager']->getRepository('TeamModel')->findOneBy(array('name' => $name))) {
-					return $application->json($teamModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
+					return $application->json($teamModel->toArray(), 200);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -253,8 +253,8 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function edit (Request $request, Application $application) {
-		// JSON and PUT
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
+		// PUT
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -304,7 +304,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($teamArray, 200);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -319,8 +319,8 @@ class TeamController implements ControllerInterface {
 	 * @return Response
 	*/
 	public function remove (Request $request, Application $application) {
-		// JSON and DELETE
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), 'DELETE') === 0) {
+		// DELETE
+		if (strpos($request->getMethod(), 'DELETE') === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -358,7 +358,7 @@ class TeamController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 			
-			return $application->json($teamArray, 200, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($teamArray, 200);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);

@@ -45,8 +45,8 @@ class AchievementController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function add (Request $request, Application $application) {
-		// JSON and POST
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
+		// POST
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_POST) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -123,7 +123,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 201, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($achievementArray, 201);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -138,8 +138,8 @@ class AchievementController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function retrieve (Request $request, Application $application) {
-		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		// GET
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the achievement exist
 				if ($achievementModels = $application['quest.orm.manager']->getRepository('AchievementModel')->findAll()) {
@@ -148,7 +148,7 @@ class AchievementController implements ControllerInterface {
 						$achievementModels[$key] = $achievementModels[$key]->toArray();
 					}
 		
-					return $application->json($achievementModels, 200, array('Access-Control-Allow-Origin' => '*'));
+					return $application->json($achievementModels, 200);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -177,12 +177,12 @@ class AchievementController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function retrieveById (Request $request, Application $application, $id) {
-		// JSON and GET
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
+		// GET
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_GET) === 0) {
 			try {
 				// Check if the achievement exist
 				if ($achievementModel = $application['quest.orm.manager']->getRepository('AchievementModel')->findOneBy(array('id' => $id))) {
-					return $application->json($achievementModel->toArray(), 200, array('Access-Control-Allow-Origin' => '*'));
+					return $application->json($achievementModel->toArray(), 200);
 				}
 			} catch (DBALException $exception) {
 				return
@@ -211,8 +211,8 @@ class AchievementController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function edit (Request $request, Application $application) {
-		// JSON and PUT
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
+		// PUT
+		if (strpos($request->getMethod(), ControllerInterface::HTTP_METHOD_PUT) === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -282,7 +282,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($achievementArray, 200);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
@@ -297,8 +297,8 @@ class AchievementController implements ControllerInterface {
 	 * @return Response
 	 */
 	public function remove (Request $request, Application $application) {
-		// JSON and DELETE
-		if (strpos($request->headers->get('Content-Type'), 'application/json') === 0 && strpos($request->getMethod(), 'DELETE') === 0) {
+		// DELETE
+		if (strpos($request->getMethod(), 'DELETE') === 0) {
 			// Get JSON data
 			if (!$jsonData = json_decode($request->getContent(), true)) {
 				return new Response('ERROR: Bad request.', 400);
@@ -336,7 +336,7 @@ class AchievementController implements ControllerInterface {
 						: new Response('ERROR: Failure.', 500);
 			}
 				
-			return $application->json($achievementArray, 200, array('Access-Control-Allow-Origin' => '*'));
+			return $application->json($achievementArray, 200);
 		}
 		
 		return new Response('ERROR: Bad request.', 400);
