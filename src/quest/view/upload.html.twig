@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{#########
+ # Title #
+ #########}
+{% block title %}Main{% endblock %}
+
+{##############################
+ # Cascading Style Sheet Head #
+ ##############################}
+{% block csshead %}{% endblock %}
+
+{###################
+ # JavaScript Head #
+ ###################}
+{% block jshead %}{% endblock %}
+
+{######################
+ # Miscellaneous Head #
+ ######################}
+{% block mischead %}
+<!-- Miscellaneous -->
+<script type="text/javascript" src="{{ RESOURCE }}/js/upload.js"></script>
+{% endblock %}
+
+{########
+ # Body #
+ ########}
+{% block body %}
+
+<header class="page-header container">
+	<h2>Upload</h2>
+</header>
+
+<aside>
+	<form id="frmUpload" class="frmUpload" action="/upload/process" method="post" enctype="multipart/form-data" role="form">
+		<div class="form-group">
+			<label for="inPicture">Picture</label>
+			<input id="datPicture" class="datPicture" name="datPicture" type="file" />
+			<p class="help-block">JPG | PNG | GIF</p>
+		</div>
+		<button id="btnSubmit" class="btn btn-default" type="submit">Submit</button>
+	</form>
+</aside>
+		
+{% endblock %}
+
+{###################
+ # JavaScript Tail #
+ ###################}
+{% block jstail %}{% endblock %}
